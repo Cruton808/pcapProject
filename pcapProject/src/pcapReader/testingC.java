@@ -28,7 +28,7 @@ import org.jnetpcap.protocol.network.Ip6;
 import static pcapReader.testingC.runFile;
 
 /**
- * Created by Mark-Laptop on 2017-03-30.
+ * Created by Creighton PC on 2017-03-30.
  */
 public class testingC {
     private static String FILENAME;
