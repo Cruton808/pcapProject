@@ -26,6 +26,9 @@ public class Controller {
     public PieChart pieChart = new PieChart();
 
     @FXML
+    public PieChart pieChart2 = new PieChart();
+
+    @FXML
     public void openFile() {
         file = new FileChooser();
         file.setTitle("Open Resource File");
@@ -38,10 +41,12 @@ public class Controller {
         pcapReader.testingC.setFilename(fileN);
 
         pcapReader.testingC.runFile();
+
+        //This is just for testing to make sure the file was read
         System.out.println("TCP count is: " + pcapReader.testingC.getCount_tcp());
         System.out.println("UDP count is: " + pcapReader.testingC.getCount_udp());
 
-        //Pie Chart
+        //Pie Chart1
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data("TCP", pcapReader.testingC.getCount_tcp()),
@@ -50,6 +55,16 @@ public class Controller {
         pieChart.setLabelLineLength(10);
         pieChart.setLegendSide(Side.LEFT);
         pieChart.setTitle("TCP vs UDP");
+
+        //Pie Chart2
+        ObservableList<PieChart.Data> pieChartData2 =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("TCP", pcapReader.testingC.getCount_ip4()),
+                        new PieChart.Data("UDP", pcapReader.testingC.getCount_arp()));
+        pieChart2.setData(pieChartData2);
+        pieChart2.setLabelLineLength(10);
+        pieChart2.setLegendSide(Side.LEFT);
+        pieChart2.setTitle("IP4 vs ARP");
 
         /**
         //show percentage when mouse over pie chart
