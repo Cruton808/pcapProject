@@ -36,8 +36,7 @@ public class testingC {
     private static int[] udp_count = {0};
     private static int[] arp_count = {0};
     private static int[] ip4_count = {0};
-
-    private static int[] igmp_count = {0};
+    private static int[] ip6_count = {0};
 
     public static void main(String[] args) {
         //For Testing purposes
@@ -49,6 +48,7 @@ public class testingC {
         System.out.println("UDP count is: " + getCount_udp());
         System.out.println("ARP count is: " + getCount_arp());
         System.out.println("IP4 count is: " + getCount_ip4());
+        System.out.println("IP6 count is: " + getCount_ip6());
 
 
     }
@@ -76,6 +76,7 @@ public class testingC {
             final Udp udp = new Udp();
             final Arp arp = new Arp();
             final Ip4 ip4 = new Ip4();
+            final Ip6 ip6 = new Ip6();
 
             public void nextPacket(JPacket packet, StringBuilder errbuf) {
                 if (packet.hasHeader(tcp)) {
@@ -90,12 +91,16 @@ public class testingC {
                 if (packet.hasHeader(ip4)) {
                     ip4_count[0] = ip4_count[0] + 1;
                 }
+                if (packet.hasHeader(ip6)) {
+                    ip6_count[0] = ip6_count[0] + 1;
+                }
             }
         }, errbuf);
         setTCP_count(tcp_count);
         setUDP_count(udp_count);
         setARP_count(arp_count);
         setIP4_count(ip4_count);
+        setIP6_count(ip6_count);
         pcap.close();
     }
     //TCP
@@ -132,6 +137,15 @@ public class testingC {
 
     public static int getCount_ip4(){
         return ip4_count[0];
+    }
+
+    //IP6
+    public static void setIP6_count(int[] count){
+        ip6_count = count;
+    }
+
+    public static int getCount_ip6(){
+        return ip6_count[0];
     }
 
 }
