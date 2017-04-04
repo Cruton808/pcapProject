@@ -46,25 +46,30 @@ public class Controller {
         System.out.println("TCP count is: " + pcapReader.testingC.getCount_tcp());
         System.out.println("UDP count is: " + pcapReader.testingC.getCount_udp());
 
+        System.out.println("IP4 count is: " + pcapReader.testingC.getCount_ip4());
+        System.out.println("IP6 count is: " + pcapReader.testingC.getCount_ip6());
+        System.out.println("ARP count is: " + pcapReader.testingC.getCount_arp());
+
         //Pie Chart1
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("TCP", pcapReader.testingC.getCount_tcp()),
-                        new PieChart.Data("UDP", pcapReader.testingC.getCount_udp()));
+                        new PieChart.Data("TCP Count: " + pcapReader.testingC.getCount_tcp(), pcapReader.testingC.getCount_tcp()),
+                        new PieChart.Data("UDP Count: " + pcapReader.testingC.getCount_udp(), pcapReader.testingC.getCount_udp()));
         pieChart.setData(pieChartData);
         pieChart.setLabelLineLength(10);
-        pieChart.setLegendSide(Side.LEFT);
+        pieChart.setLegendSide(Side.BOTTOM);
         pieChart.setTitle("TCP vs UDP");
 
         //Pie Chart2
         ObservableList<PieChart.Data> pieChartData2 =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("TCP", pcapReader.testingC.getCount_ip4()),
-                        new PieChart.Data("UDP", pcapReader.testingC.getCount_arp()));
+                        new PieChart.Data("IP4 Count: " + pcapReader.testingC.getCount_ip4(), pcapReader.testingC.getCount_ip4()),
+                        new PieChart.Data("IP6 Count: " + pcapReader.testingC.getCount_ip6(), pcapReader.testingC.getCount_ip6()),
+                        new PieChart.Data("ARP Count: " + pcapReader.testingC.getCount_arp(), pcapReader.testingC.getCount_arp()));
         pieChart2.setData(pieChartData2);
         pieChart2.setLabelLineLength(10);
-        pieChart2.setLegendSide(Side.LEFT);
-        pieChart2.setTitle("IP4 vs ARP");
+        pieChart2.setLegendSide(Side.BOTTOM);
+        pieChart2.setTitle("IP4/IP6/ARP");
 
         /**
         //show percentage when mouse over pie chart
