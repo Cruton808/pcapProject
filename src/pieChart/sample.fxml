@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: rgb(200,200,200);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pieChart.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0" style="-fx-background-color: rgb(200,200,200);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pieChart.Controller">
     <children>
         <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="65.0">
             <menus>
@@ -21,19 +21,18 @@
                 </Menu>
             </menus>
         </MenuBar>
-      <PieChart fx:id="pieChart" layoutX="26.0" layoutY="477.0" prefHeight="278.0" prefWidth="378.0" />
-      <TabPane layoutX="319.0" layoutY="28.0" prefHeight="416.0" prefWidth="659.0" tabClosingPolicy="UNAVAILABLE">
+      <PieChart fx:id="pieChart" layoutX="15.0" layoutY="442.0" prefHeight="278.0" prefWidth="378.0" />
+      <TabPane layoutX="258.0" layoutY="6.0" prefHeight="416.0" prefWidth="1194.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="eTable" text="Ethernet">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutY="1.0" prefHeight="373.0" prefWidth="657.0">
+                        <TableView fx:id="ethernet_table" layoutX="-2.0" layoutY="1.0" prefHeight="373.0" prefWidth="1187.0">
                           <columns>
-                            <TableColumn fx:id="eDest" prefWidth="186.0" text="Destination" />
-                            <TableColumn fx:id="eSource" minWidth="0.0" prefWidth="158.0" text="Source" />
-                              <TableColumn fx:id="eTOL" prefWidth="175.0" text="Type of Length" />
-                              <TableColumn fx:id="eData" minWidth="0.0" prefWidth="137.0" text="Data" />
+                            <TableColumn fx:id="ethernet_destination" prefWidth="296.9999694824219" text="Destination" />
+                            <TableColumn fx:id="ethernet_source" minWidth="0.0" prefWidth="263.79998779296875" text="Source" />
+                              <TableColumn fx:id="ethernet_type" minWidth="0.0" prefWidth="190.800048828125" text="Type" />
                           </columns>
                         </TableView>
                      </children>
@@ -44,16 +43,14 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="376.0" prefWidth="657.0">
+                        <TableView fx:id="tcp_table" prefHeight="376.0" prefWidth="903.0">
                           <columns>
-                            <TableColumn fx:id="tDestPort" prefWidth="101.0" text="Dest. Port" />
-                            <TableColumn fx:id="tSourcePort" prefWidth="93.0" text="Source Port" />
-                              <TableColumn fx:id="tSource" prefWidth="61.0" text="Source" />
-                              <TableColumn fx:id="tDest" prefWidth="93.0" text="Destination" />
-                              <TableColumn fx:id="tSeq" prefWidth="50.0" text="Seq" />
-                              <TableColumn fx:id="tAck" prefWidth="56.0" text="Ack" />
-                              <TableColumn fx:id="tHLength" prefWidth="116.0" text="Header Length" />
-                              <TableColumn fx:id="tChecksum" prefWidth="86.0" text="Checksum" />
+                            <TableColumn fx:id="tcp_destination" prefWidth="142.60000610351562" text="Dest. Port" />
+                            <TableColumn fx:id="tcp_source" prefWidth="129.39999389648438" text="Source Port" />
+                              <TableColumn fx:id="tcp_seq" prefWidth="127.199951171875" text="Seq" />
+                              <TableColumn fx:id="tcp_ack" prefWidth="138.800048828125" text="Ack" />
+                              <TableColumn fx:id="tcp_header" prefWidth="165.4000244140625" text="Header Length" />
+                              <TableColumn fx:id="tcp_checksum" prefWidth="186.5999755859375" text="Checksum" />
                           </columns>
                         </TableView>
                      </children>
@@ -64,12 +61,12 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="376.0" prefWidth="657.0">
+                        <TableView fx:id="udp_table" prefHeight="376.0" prefWidth="838.0">
                           <columns>
-                            <TableColumn fx:id="uSPort" prefWidth="180.0" text="Source Port" />
-                            <TableColumn fx:id="uDestPort" prefWidth="156.0" text="Destination Port" />
-                              <TableColumn fx:id="uLength" minWidth="0.0" prefWidth="104.0" text="Length" />
-                              <TableColumn fx:id="uChecksum" minWidth="0.0" prefWidth="141.0" text="Checksum" />
+                            <TableColumn fx:id="udp_source" prefWidth="180.0" text="Source Port" />
+                            <TableColumn fx:id="udp_destination" prefWidth="184.0" text="Destination Port" />
+                              <TableColumn fx:id="udp_header" minWidth="0.0" prefWidth="261.0" text="Header Length" />
+                              <TableColumn fx:id="udp_checksum" minWidth="0.0" prefWidth="202.20001220703125" text="Checksum" />
                           </columns>
                         </TableView>
                      </children>
@@ -80,15 +77,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="375.0" prefWidth="657.0">
+                        <TableView fx:id="ip4_table" prefHeight="375.0" prefWidth="1136.0">
                           <columns>
-                            <TableColumn fx:id="iVersion" prefWidth="111.0" text="Version" />
-                            <TableColumn fx:id="iHLen" prefWidth="136.0" text="Header Length" />
-                              <TableColumn fx:id="iLen" prefWidth="85.0" text="Length" />
-                              <TableColumn fx:id="iTTL" prefWidth="62.0" text="TTL" />
-                              <TableColumn fx:id="iType" prefWidth="64.0" text="Type" />
-                              <TableColumn fx:id="iSource" prefWidth="97.0" text="Source" />
-                              <TableColumn fx:id="iDest" prefWidth="101.0" text="Destination" />
+                            <TableColumn fx:id="ip4_version" prefWidth="83.80001831054688" text="Version" />
+                            <TableColumn fx:id="ip4_headerLength" prefWidth="140.79998779296875" text="Header Length" />
+                              <TableColumn fx:id="ip4_length" prefWidth="108.20001220703125" text="Length" />
+                              <TableColumn fx:id="ip4_ttl" prefWidth="103.20001220703125" text="TTL" />
+                              <TableColumn fx:id="ip4_type" prefWidth="218.79998779296875" text="Type" />
+                              <TableColumn fx:id="ip4_source" prefWidth="214.0" text="Source" />
+                              <TableColumn fx:id="ip4_destination" prefWidth="247.39990234375" text="Destination" />
                           </columns>
                         </TableView>
                      </children>
@@ -102,6 +99,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <PieChart fx:id="pieChart2" layoutX="601.0" layoutY="489.0" prefHeight="278.0" prefWidth="378.0" />
+      <PieChart fx:id="pieChart2" layoutX="422.0" layoutY="444.0" prefHeight="278.0" prefWidth="378.0" />
     </children>
 </AnchorPane>
