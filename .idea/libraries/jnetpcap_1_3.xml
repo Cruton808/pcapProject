@@ -1,13 +1,10 @@
 <component name="libraryTable">
   <library name="jnetpcap-1.3">
-    <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../ACIT 2515- Java/[1]Additional Libraries/jnetpcap-1.3.0" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <NATIVE>
-      <root url="file://$PROJECT_DIR$/../../ACIT 2515- Java/[1]Additional Libraries/jnetpcap-1.3.0" />
+      <root url="file://$USER_HOME$/Downloads/jnetpcap-1.3.0-1.win64/jnetpcap-1.3.0" />
     </NATIVE>
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/../../ACIT 2515- Java/[1]Additional Libraries/jnetpcap-1.3.0" recursive="false" />
   </library>
 </component>

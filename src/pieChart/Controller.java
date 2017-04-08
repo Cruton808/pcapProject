@@ -44,11 +44,17 @@ public class Controller implements Initializable {
     public TableColumn<TableEntries, String> ethernet_source;
     @FXML
     public TableColumn<TableEntries, String> ethernet_type;
+    @FXML
+    public TableColumn<TableEntries, String> ethernet_date;
+    @FXML
+    public TableColumn<TableEntries, String> ethernet_caplen;
+    @FXML
+    public TableColumn<TableEntries, String> ethernet_len;
 
     //TCP Table
+
     @FXML
     public TableView tcp_table = new TableView();
-    @FXML
     public TableColumn<TableEntries, String> tcp_destination;
     @FXML
     public TableColumn<TableEntries, String> tcp_source;
@@ -60,6 +66,10 @@ public class Controller implements Initializable {
     public TableColumn<TableEntries, String> tcp_header;
     @FXML
     public TableColumn<TableEntries, String> tcp_checksum;
+    @FXML
+    public TableColumn<TableEntries, String> tcp_checksum_c;
+    @FXML
+    public TableColumn<TableEntries, String> tcp_seglength;
 
     //UDP Table
     @FXML
@@ -72,6 +82,8 @@ public class Controller implements Initializable {
     public TableColumn<TableEntries, String> udp_header;
     @FXML
     public TableColumn<TableEntries, String> udp_checksum;
+    @FXML
+    public TableColumn<TableEntries, String> udp_checksum_c;
 
     //IP4 Table
     @FXML
@@ -91,6 +103,23 @@ public class Controller implements Initializable {
     @FXML
     public TableColumn<TableEntries, String> ip4_destination;
 
+    //IP6 Table
+    @FXML
+    public TableView ip6_table = new TableView();
+    @FXML
+    public TableColumn<TableEntries, String> ip6_version;
+    @FXML
+    public TableColumn<TableEntries, String> ip6_hdrlength;
+    @FXML
+    public TableColumn<TableEntries, String> ip6_hoplimit;
+    @FXML
+    public TableColumn<TableEntries,String> ip6_source;
+    @FXML
+    public TableColumn<TableEntries, String> ip6_dest;
+    @FXML
+    public TableColumn<TableEntries, String> ip6_nexthdr;
+    @FXML
+    public TableColumn<TableEntries, String> ip6_length;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -98,6 +127,9 @@ public class Controller implements Initializable {
         ethernet_destination.setCellValueFactory(cellData -> cellData.getValue().destination_ethernetProperty());
         ethernet_source.setCellValueFactory(cellData -> cellData.getValue().source_ethernetProperty());
         ethernet_type.setCellValueFactory(cellData -> cellData.getValue().type_ethernetProperty());
+        ethernet_date.setCellValueFactory(cellData -> cellData.getValue().ethernet_dateProperty());
+        ethernet_caplen.setCellValueFactory(cellData -> cellData.getValue().ethernet_caplenProperty());
+        ethernet_len.setCellValueFactory(cellData -> cellData.getValue().ethernet_lenProperty());
 
         //TCP
         tcp_destination.setCellValueFactory(cellData -> cellData.getValue().destination_tcpProperty());
@@ -106,12 +138,15 @@ public class Controller implements Initializable {
         tcp_ack.setCellValueFactory(cellData -> cellData.getValue().ack_tcpProperty());
         tcp_header.setCellValueFactory(cellData -> cellData.getValue().headerLength_tcpProperty());
         tcp_checksum.setCellValueFactory(cellData -> cellData.getValue().checksum_tcpProperty());
+        tcp_checksum_c.setCellValueFactory(cellData -> cellData.getValue().checksum_tcp_cProperty());
+        tcp_seglength.setCellValueFactory(cellData -> cellData.getValue().tcp_seglengthProperty());
 
         //UDP
         udp_destination.setCellValueFactory(cellData -> cellData.getValue().destination_udpProperty());
         udp_source.setCellValueFactory(cellData -> cellData.getValue().source_udpProperty());
         udp_header.setCellValueFactory(cellData -> cellData.getValue().headerLength_udpProperty());
         udp_checksum.setCellValueFactory(cellData -> cellData.getValue().checksum_udpProperty());
+        udp_checksum_c.setCellValueFactory(cellData -> cellData.getValue().checksum_udp_cProperty());
 
         //IP4
         ip4_version.setCellValueFactory(cellData -> cellData.getValue().version_ip4Property());
@@ -121,6 +156,16 @@ public class Controller implements Initializable {
         ip4_type.setCellValueFactory(cellData -> cellData.getValue().type_ip4Property());
         ip4_source.setCellValueFactory(cellData -> cellData.getValue().source_ip4Property());
         ip4_destination.setCellValueFactory(cellData -> cellData.getValue().destination_ip4Property());
+
+        //IP6
+        ip6_version.setCellValueFactory(cellData -> cellData.getValue().version_ip6Property());
+        ip6_hdrlength.setCellValueFactory(cellData -> cellData.getValue().payload_lengthProperty());
+        ip6_hoplimit.setCellValueFactory(cellData -> cellData.getValue().hop_limitProperty());
+        ip6_source.setCellValueFactory(cellData -> cellData.getValue().source_ip6Property());
+        ip6_dest.setCellValueFactory(cellData -> cellData.getValue().destination_ip6Property());
+        ip6_nexthdr.setCellValueFactory(cellData -> cellData.getValue().next_headerProperty());
+        ip6_length.setCellValueFactory(cellData -> cellData.getValue().length_ip6Property());
+
     }
 
     public void setTableData(){
@@ -145,12 +190,19 @@ public class Controller implements Initializable {
         udp_columns.setAll(table_entries3);
         udp_table.setItems(udp_columns);
 
-        //
+        //IP4
         ArrayList<TableEntries> table_entries4;
         table_entries4 = pcapReader.testingC.getIP4TableEntries();
         ObservableList<TableEntries> ip4_columns = FXCollections.observableArrayList();
         ip4_columns.setAll(table_entries4);
         ip4_table.setItems(ip4_columns);
+
+        //IP6
+        ArrayList<TableEntries> table_entries5;
+        table_entries5 = pcapReader.testingC.getIP6TableEntries();
+        ObservableList<TableEntries> ip6_columns = FXCollections.observableArrayList();
+        ip6_columns.setAll(table_entries5);
+        ip6_table.setItems(ip6_columns);
 
     }
 

@@ -3,19 +3,14 @@ package pcapReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.jnetpcap.Pcap;
 import org.jnetpcap.nio.JMemory;
-import org.jnetpcap.packet.JFlow;
-import org.jnetpcap.packet.JFlowKey;
-import org.jnetpcap.packet.JFlowMap;
-import org.jnetpcap.packet.JPacket;
-import org.jnetpcap.packet.JPacketHandler;
-import org.jnetpcap.packet.JScanner;
-import org.jnetpcap.packet.PcapPacket;
+import org.jnetpcap.packet.*;
 import org.jnetpcap.protocol.lan.Ethernet;
 import org.jnetpcap.protocol.network.Icmp;
 import org.jnetpcap.protocol.network.Ip4;
@@ -58,12 +53,28 @@ public class CommonUsageExamples {
          */
         final String FILENAME = "tests/new_test.pcap";
         final StringBuilder errbuf = new StringBuilder();
+        int total = 50;
 
         final Pcap pcap = Pcap.openOffline(FILENAME, errbuf);
         if (pcap == null) {
             System.err.println(errbuf); // Error is stored in errbuf if any
             return;
         }
+
+//        PcapPacketHandler<String> jpacketHandler = new PcapPacketHandler<String>() {
+//
+//            public void nextPacket(PcapPacket packet, String user) {
+//
+//                System.out.printf("Received packet at %s caplen=%-4d len=%-4d %s\n",
+//                        new Date(packet.getCaptureHeader().timestampInMillis()),
+//                        packet.getCaptureHeader().caplen(),  // Length actually captured
+//                        packet.getCaptureHeader().wirelen(), // Original length
+//                        user                                 // User supplied object
+//                );
+//            }
+//        };
+//
+//        pcap.loop(total, jpacketHandler, "Creighton was Here!");
 
         /*
          * We have an opened the capture file now time to read packets. We use a
@@ -102,7 +113,7 @@ public class CommonUsageExamples {
 
 
         PrintWriter finalFile_out = file_out;
-        pcap.loop(50, new JPacketHandler<StringBuilder>() {
+        pcap.loop(total, new JPacketHandler<StringBuilder>() {
 
             /**
              * We purposely define and allocate our working tcp header (accessor)
@@ -125,8 +136,6 @@ public class CommonUsageExamples {
             final Arp arp = new Arp();
 
             final Ethernet ethernet = new Ethernet();
-
-
 
             final Ip6 ip6 = new Ip6();
 
@@ -161,7 +170,9 @@ public class CommonUsageExamples {
                      * Now get our tcp header definition (accessor) peered with actual
                      * memory that holds the tcp header within the packet.
                      */
+
                     packet.getHeader(tcp);
+
 
                     System.out.printf("tcp.dst_port=%d%n", tcp.destination());
                     System.out.printf("tcp.src_port=%d%n", tcp.source());
@@ -183,8 +194,20 @@ public class CommonUsageExamples {
                  */
                 //Ethernet
                 if (packet.hasHeader(ethernet)) {
+                    //date
+                    System.out.printf("Time::%s \n", new Date(packet.getCaptureHeader().timestampInMillis()));
+                    //len of packet
+                    System.out.printf("Wire Length:: %-4d\n",  packet.getCaptureHeader().caplen());
+                    //len of data available in the capture
+                    System.out.printf("Cap Length:: %-4d\n", packet.getCaptureHeader().wirelen());
+
                     System.out.printf("ethernet header::%s%n", ethernet.toString());
                     finalFile_out.printf("ethernet header::%s%n", ethernet.toString());
+                }
+                //IPV6
+                if(packet.hasHeader(ip6)){
+                    System.out.printf("ip6 Header::%s%n", ip6.toString());
+                    finalFile_out.printf("ip6 header::%s%n", ip6.toString());
                 }
 
                 //ARP
@@ -215,11 +238,9 @@ public class CommonUsageExamples {
                     System.out.printf("http header::%s%n", http);
                     finalFile_out.printf("http header::%s%n", http);
                 }
-
-
-                //if (packet.hasHeader(tcp)) {
-                //    System.out.printf("tcp header::%s%n", tcp.toString());
-                //}
+                if (packet.hasHeader(tcp)) {
+                    System.out.printf("tcp header::%s%n", tcp.toString());
+                }
 
                 /*
                  * A typical and common approach to getting headers from a packet is to
