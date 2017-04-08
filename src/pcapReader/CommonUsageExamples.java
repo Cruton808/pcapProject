@@ -56,7 +56,7 @@ public class CommonUsageExamples {
         /*
          * Example #1 open offline capture file for reading packets.
          */
-        final String FILENAME = "tests/random_test.pcap";
+        final String FILENAME = "tests/new_test.pcap";
         final StringBuilder errbuf = new StringBuilder();
 
         final Pcap pcap = Pcap.openOffline(FILENAME, errbuf);
