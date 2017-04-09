@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -84,17 +83,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="ip4_table" prefHeight="375.0" prefWidth="1186.0">
+                        <TableView fx:id="ip4_table" layoutX="14.0" layoutY="1.0" prefHeight="375.0" prefWidth="1186.0">
                           <columns>
                             <TableColumn fx:id="ip4_version" prefWidth="67.0" text="Version" />
                             <TableColumn fx:id="ip4_headerLength" prefWidth="137.0" text="Header Length" />
                               <TableColumn fx:id="ip4_length" prefWidth="90.0" text="Length" />
                               <TableColumn fx:id="ip4_ttl" prefWidth="46.0" text="TTL" />
                               <TableColumn fx:id="ip4_type" prefWidth="88.0" text="Type" />
-                              <TableColumn fx:id="ip4_source" prefWidth="111.0" text="Source" />
-                              <TableColumn fx:id="ip4_source_name" prefWidth="131.0" text="Souce Name" />
-                              <TableColumn fx:id="ip4_destination" prefWidth="160.0" text="Destination" />
-                              <TableColumn fx:id="ip4_dest_name" prefWidth="131.0" text="Dest Name" />
+                              <TableColumn fx:id="ip4_source" prefWidth="149.0" text="Source" />
+                              <TableColumn fx:id="ip4_source_name" prefWidth="188.0" text="Source Name" />
+                              <TableColumn fx:id="ip4_destination" prefWidth="188.0" text="Destination" />
+                              <TableColumn fx:id="ip4_dest_name" prefWidth="230.0" text="Dest Name" />
                           </columns>
                         </TableView>
                      </children>
@@ -122,6 +121,5 @@
         </tabs>
       </TabPane>
       <PieChart fx:id="pieChart2" layoutX="433.0" layoutY="442.0" prefHeight="278.0" prefWidth="378.0" />
-      <Button layoutX="31.0" layoutY="177.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="142.0" text="Show Host Names" />
     </children>
 </AnchorPane>

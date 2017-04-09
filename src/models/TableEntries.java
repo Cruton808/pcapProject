@@ -126,7 +126,7 @@ public class TableEntries {
     public StringProperty source_name_ip4Property() {
         return source_name_ip4;
     }
-    public void setSource_name_ip4(InetAddress source_name_ip4) {
+    public void setSource_name_ip4(String source_name_ip4) {
         this.source_name_ip4.set(String.valueOf(source_name_ip4));
     }
     public String getDest_name_ip4() {

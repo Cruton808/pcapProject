@@ -136,12 +136,17 @@ public class testingC {
                     IP4_tables.setType_ip4(String.valueOf(ip4.typeEnum()));
                     IP4_tables.setSource_ip4(FormatUtils.ip(ip4.source()));
                     IP4_tables.setDestination_ip4(FormatUtils.ip(ip4.destination()));
-                    try {
-                        IP4_tables.setSource_name_ip4(InetAddress.getByName(FormatUtils.ip(ip4.source())));
-                        IP4_tables.setDest_name_ip4(InetAddress.getByName(FormatUtils.ip(ip4.destination())));
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    }
+
+//                    try {
+//                        InetAddress add = InetAddress.getByName(FormatUtils.ip(ip4.destination()));
+//                        InetAddress d = InetAddress.getByName(FormatUtils.ip(ip4.destination()));
+//                        String host = add.getHostName();
+//                        String dest = d.getHostName();
+//                        IP4_tables.setSource_name_ip4(String.valueOf(host));
+//                        IP4_tables.setDest_name_ip4(InetAddress.getByName(dest));
+//                    } catch (UnknownHostException e) {
+//                        e.printStackTrace();
+//                    }
 
 
                 }
@@ -186,20 +191,20 @@ public class testingC {
         setIP6_count(ip6_count);
         setICMP_count(icmp_count);
 
-        //get host names
-            for (TableEntries entry : ip4TableValues){
-                String ip4Source = entry.getSource_ip4();
-                String ip4Dest = entry.getDestination_ip4();
-                try{
-                    InetAddress host = getByName(ip4Source);
-                    InetAddress dest = getByName(ip4Dest);
-                    System.out.println("Host Name: " + host.getHostName() + "\n" + "IP Address " + host.getHostAddress());
-                    System.out.println("Destination Name: " + dest.getHostName() + "\n" + "IP Address " + dest.getHostAddress());
-                    System.out.println();
-                } catch (UnknownHostException e){
-                    e.printStackTrace();
-                }
-        }
+//        //get host names
+//            for (TableEntries entry : ip4TableValues){
+//                String ip4Source = entry.getSource_ip4();
+//                String ip4Dest = entry.getDestination_ip4();
+//                try{
+//                    InetAddress host = getByName(ip4Source);
+//                    InetAddress dest = getByName(ip4Dest);
+//                    System.out.println("Host Name: " + host.getHostName() + "\n" + "IP Address " + host.getHostAddress());
+//                    System.out.println("Destination Name: " + dest.getHostName() + "\n" + "IP Address " + dest.getHostAddress());
+//                    System.out.println();
+//                } catch (UnknownHostException e){
+//                    e.printStackTrace();
+//                }
+//        }
         pcap.close();
     }
     //TCP
