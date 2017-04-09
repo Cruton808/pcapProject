@@ -102,6 +102,10 @@ public class Controller implements Initializable {
     public TableColumn<TableEntries, String> ip4_source;
     @FXML
     public TableColumn<TableEntries, String> ip4_destination;
+    @FXML
+    public TableColumn<TableEntries, String> ip4_source_name;
+    @FXML
+    public TableColumn<TableEntries, String> ip4_dest_name;
 
     //IP6 Table
     @FXML
@@ -156,6 +160,9 @@ public class Controller implements Initializable {
         ip4_type.setCellValueFactory(cellData -> cellData.getValue().type_ip4Property());
         ip4_source.setCellValueFactory(cellData -> cellData.getValue().source_ip4Property());
         ip4_destination.setCellValueFactory(cellData -> cellData.getValue().destination_ip4Property());
+        ip4_source_name.setCellValueFactory(cellData -> cellData.getValue().source_name_ip4Property());
+        ip4_dest_name.setCellValueFactory(cellData -> cellData.getValue().dest_name_ip4Property());
+
 
         //IP6
         ip6_version.setCellValueFactory(cellData -> cellData.getValue().version_ip6Property());
@@ -251,8 +258,13 @@ public class Controller implements Initializable {
         pieChart2.setLegendSide(Side.BOTTOM);
         pieChart2.setTitle("IP4/IP6/ARP");
 
+
+
         //Ethernet Table
         setTableData();
+
+
+
 
 
         }

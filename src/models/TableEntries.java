@@ -3,6 +3,7 @@ package models;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.net.InetAddress;
 import java.util.Date;
 
 /**
@@ -42,6 +43,8 @@ public class TableEntries {
     private StringProperty type_ip4 = new SimpleStringProperty();
     private StringProperty source_ip4 = new SimpleStringProperty();
     private StringProperty destination_ip4 = new SimpleStringProperty();
+    private StringProperty source_name_ip4 = new SimpleStringProperty();
+    private StringProperty dest_name_ip4 = new SimpleStringProperty();
 
     //IP6
     private StringProperty version_ip6 = new SimpleStringProperty();
@@ -51,9 +54,6 @@ public class TableEntries {
     private StringProperty destination_ip6 = new SimpleStringProperty();
     private StringProperty next_header = new SimpleStringProperty();
     private StringProperty length_ip6 = new SimpleStringProperty();
-
-
-
 
     //GETTERS AND SETTERS
     //IP4
@@ -119,6 +119,24 @@ public class TableEntries {
     }
     public void setDestination_ip4(String destination_ip4) {
         this.destination_ip4.set(destination_ip4);
+    }
+    public String getSource_name_ip4() {
+        return source_name_ip4.get();
+    }
+    public StringProperty source_name_ip4Property() {
+        return source_name_ip4;
+    }
+    public void setSource_name_ip4(InetAddress source_name_ip4) {
+        this.source_name_ip4.set(String.valueOf(source_name_ip4));
+    }
+    public String getDest_name_ip4() {
+        return dest_name_ip4.get();
+    }
+    public StringProperty dest_name_ip4Property() {
+        return dest_name_ip4;
+    }
+    public void setDest_name_ip4(InetAddress dest_name_ip4) {
+        this.dest_name_ip4.set(String.valueOf(dest_name_ip4));
     }
 
 

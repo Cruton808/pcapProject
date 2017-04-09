@@ -1,7 +1,10 @@
 package IPConverter;
 
+import sun.rmi.runtime.Log;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.*;
 
 import static java.net.InetAddress.*;
 
@@ -10,7 +13,16 @@ import static java.net.InetAddress.*;
  */
 public class IPConverter {
     public static void main(String[] args) {
-        String hostName = "8.8.8.8";
+
+        Scanner scan = new Scanner(System.in);
+        String hostName;
+
+        System.out.println("Enter an ip address:");
+        hostName = scan.nextLine();
+
+//        for(String host : hosts){
+//
+//        }
         try{
             InetAddress host = getByName(hostName);
             System.out.println(host.getHostName());
