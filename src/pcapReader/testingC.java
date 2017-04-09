@@ -117,6 +117,7 @@ public class testingC {
                     TCP_table.setChecksum_tcp(String.valueOf(tcp.checksum()));
                     TCP_table.setChecksum_tcp_c(tcp.checksumDescription());
                     TCP_table.setTcp_seglength(String.valueOf(tcp.getPayloadLength()));
+                    tcpTableValues.add(TCP_table);
                 }
                 if (packet.hasHeader(udp)) {
                     udp_count[0] = udp_count[0] + 1;
@@ -125,6 +126,7 @@ public class testingC {
                     UDP_table.setHeaderLength_udp(String.valueOf(udp.getHeaderLength()));
                     UDP_table.setChecksum_udp(String.valueOf(udp.checksum()));
                     UDP_table.setChecksum_tcp_c(udp.checksumDescription());
+                    udpTableValues.add(UDP_table);
 
                 }
                 if (packet.hasHeader(arp)) {
@@ -147,6 +149,7 @@ public class testingC {
                     IP4_tables.setDestination_ip4(ip4Dest);
                     IP4_tables.setSource_name_ip4(IPConverter.getHostname(ip4Source));
                     IP4_tables.setDest_name_ip4(IPConverter.getHostname(ip4Dest));
+                    ip4TableValues.add(IP4_tables);
 
                 }
                 if (packet.hasHeader(ip6)) {
@@ -158,6 +161,7 @@ public class testingC {
                     IP6_tables.setDestination_ip6((FormatUtils.ip(ip6.destination())));
                     IP6_tables.setNext_header(String.valueOf(ip6.next()));
                     IP6_tables.setLength_ip6(String.valueOf(ip6.getNextHeaderId()));
+                    ip6TableValues.add(IP6_tables);
 
                 }
                 if (packet.hasHeader(icmp)) {
@@ -174,13 +178,10 @@ public class testingC {
                     te.setEthernet_date(new Date(packet.getCaptureHeader().timestampInMillis()));
                     te.setEthernet_caplen(packet.getCaptureHeader().caplen());
                     te.setEthernet_len(packet.getCaptureHeader().wirelen());
+                    ethernetTableValues.add(te);
 
                 }
-                ethernetTableValues.add(te);
-                tcpTableValues.add(TCP_table);
-                udpTableValues.add(UDP_table);
-                ip4TableValues.add(IP4_tables);
-                ip6TableValues.add(IP6_tables);
+
             }
         }, errbuf);
         setTCP_count(tcp_count);
