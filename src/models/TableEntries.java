@@ -3,7 +3,6 @@ package models;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.net.InetAddress;
 import java.util.Date;
 
 /**
@@ -135,7 +134,7 @@ public class TableEntries {
     public StringProperty dest_name_ip4Property() {
         return dest_name_ip4;
     }
-    public void setDest_name_ip4(InetAddress dest_name_ip4) {
+    public void setDest_name_ip4(String dest_name_ip4) {
         this.dest_name_ip4.set(String.valueOf(dest_name_ip4));
     }
 

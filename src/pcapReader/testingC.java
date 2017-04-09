@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import IPConverter.IPConverter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import models.TableEntries;
@@ -87,6 +88,9 @@ public class testingC {
             return;
         }
 
+        //TODO we can either reset the cache or just add ip address to it
+        IPConverter.resetCache();
+
         pcap.loop(Pcap.LOOP_INFINITE, new JPacketHandler<StringBuilder>() {
             final Tcp tcp = new Tcp();
             final Udp udp = new Udp();
@@ -113,7 +117,6 @@ public class testingC {
                     TCP_table.setChecksum_tcp(String.valueOf(tcp.checksum()));
                     TCP_table.setChecksum_tcp_c(tcp.checksumDescription());
                     TCP_table.setTcp_seglength(String.valueOf(tcp.getPayloadLength()));
-                    tcpTableValues.add(TCP_table);
                 }
                 if (packet.hasHeader(udp)) {
                     udp_count[0] = udp_count[0] + 1;
@@ -122,7 +125,6 @@ public class testingC {
                     UDP_table.setHeaderLength_udp(String.valueOf(udp.getHeaderLength()));
                     UDP_table.setChecksum_udp(String.valueOf(udp.checksum()));
                     UDP_table.setChecksum_tcp_c(udp.checksumDescription());
-                    udpTableValues.add(UDP_table);
 
                 }
                 if (packet.hasHeader(arp)) {
@@ -131,27 +133,20 @@ public class testingC {
                 if (packet.hasHeader(ip4)) {
                     ip4_count[0] = ip4_count[0] + 1;
 
+                    String ip4Source = FormatUtils.ip(ip4.source());
+                    String ip4Dest = FormatUtils.ip(ip4.destination());
+
+                    IPConverter.add(ip4Source);
+                    IPConverter.add(ip4Dest);
                     IP4_tables.setVersion_ip4(String.valueOf(ip4.version()));
                     IP4_tables.setHeaderLength_ip4(String.valueOf(ip4.getHeaderLength()));
                     IP4_tables.setLength_ip4(String.valueOf(ip4.getLength()));
                     IP4_tables.setTtl_ip4(String.valueOf(ip4.ttl()));
                     IP4_tables.setType_ip4(String.valueOf(ip4.typeEnum()));
-                    IP4_tables.setSource_ip4(FormatUtils.ip(ip4.source()));
-                    IP4_tables.setDestination_ip4(FormatUtils.ip(ip4.destination()));
-
-//                    try {
-//                        InetAddress add = InetAddress.getByName(FormatUtils.ip(ip4.destination()));
-//                        InetAddress d = InetAddress.getByName(FormatUtils.ip(ip4.destination()));
-//                        String host = add.getHostName();
-//                        String dest = d.getHostName();
-//                        IP4_tables.setSource_name_ip4(String.valueOf(host));
-//                        IP4_tables.setDest_name_ip4(InetAddress.getByName(dest));
-//                    } catch (UnknownHostException e) {
-//                        e.printStackTrace();
-//                    }
-
-                    ip4TableValues.add(IP4_tables);
-
+                    IP4_tables.setSource_ip4(ip4Source);
+                    IP4_tables.setDestination_ip4(ip4Dest);
+                    IP4_tables.setSource_name_ip4(IPConverter.getHostname(ip4Source));
+                    IP4_tables.setDest_name_ip4(IPConverter.getHostname(ip4Dest));
 
                 }
                 if (packet.hasHeader(ip6)) {
@@ -163,7 +158,6 @@ public class testingC {
                     IP6_tables.setDestination_ip6((FormatUtils.ip(ip6.destination())));
                     IP6_tables.setNext_header(String.valueOf(ip6.next()));
                     IP6_tables.setLength_ip6(String.valueOf(ip6.getNextHeaderId()));
-                    ip6TableValues.add(IP6_tables);
 
                 }
                 if (packet.hasHeader(icmp)) {
@@ -180,11 +174,13 @@ public class testingC {
                     te.setEthernet_date(new Date(packet.getCaptureHeader().timestampInMillis()));
                     te.setEthernet_caplen(packet.getCaptureHeader().caplen());
                     te.setEthernet_len(packet.getCaptureHeader().wirelen());
-                    ethernetTableValues.add(te);
 
                 }
-
-
+                ethernetTableValues.add(te);
+                tcpTableValues.add(TCP_table);
+                udpTableValues.add(UDP_table);
+                ip4TableValues.add(IP4_tables);
+                ip6TableValues.add(IP6_tables);
             }
         }, errbuf);
         setTCP_count(tcp_count);
@@ -195,18 +191,18 @@ public class testingC {
         setICMP_count(icmp_count);
 
 //        //get host names
-//            for (TableEntries entry : ip4TableValues){
-//                String ip4Source = entry.getSource_ip4();
-//                String ip4Dest = entry.getDestination_ip4();
-//                try{
-//                    InetAddress host = getByName(ip4Source);
-//                    InetAddress dest = getByName(ip4Dest);
-//                    System.out.println("Host Name: " + host.getHostName() + "\n" + "IP Address " + host.getHostAddress());
-//                    System.out.println("Destination Name: " + dest.getHostName() + "\n" + "IP Address " + dest.getHostAddress());
-//                    System.out.println();
-//                } catch (UnknownHostException e){
-//                    e.printStackTrace();
-//                }
+//        for (TableEntries entry : ip4TableValues){
+//            String ip4Source = entry.getSource_ip4();
+//            String ip4Dest = entry.getDestination_ip4();
+//            try{
+//                InetAddress host = getByName(ip4Source);
+//                InetAddress dest = getByName(ip4Dest);
+//                System.out.println("Host Name: " + host.getHostName() + "\n" + "IP Address " + host.getHostAddress());
+//                System.out.println("Destination Name: " + dest.getHostName() + "\n" + "IP Address " + dest.getHostAddress());
+//                System.out.println();
+//            } catch (UnknownHostException e){
+//                e.printStackTrace();
+//            }
 //        }
         pcap.close();
     }

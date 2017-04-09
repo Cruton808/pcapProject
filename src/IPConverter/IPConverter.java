@@ -12,22 +12,38 @@ import static java.net.InetAddress.*;
  * Created by Creighton PC on 4/8/2017.
  */
 public class IPConverter {
-    public static void main(String[] args) {
 
-        Scanner scan = new Scanner(System.in);
-        String hostName;
 
-        System.out.println("Enter an ip address:");
-        hostName = scan.nextLine();
+    private static HashMap<String, String> ipHostNamePair = new HashMap<String, String>();
 
-//        for(String host : hosts){
-//
-//        }
-        try{
-            InetAddress host = getByName(hostName);
-            System.out.println(host.getHostName());
-        } catch (UnknownHostException e){
-            e.printStackTrace();
+    //add this ip to cached map
+    public static void add(String ip) {
+        if(!ipHostNamePair.containsKey(ip)) {
+            String hostname = "";
+
+            try {
+                hostname = InetAddress.getByName(ip).getHostName();
+                System.out.println(hostname);
+            } catch (UnknownHostException e) {
+                hostname = ip;
+                //do nothing. hostname is blank
+                //e.printStackTrace();
+            }
+
+            ipHostNamePair.put(ip, hostname);
         }
+        //resolve hostname
+
     }
+
+    public static String getHostname(String ip) {
+
+        return ipHostNamePair.get(ip);
+    }
+
+
+    public static void resetCache() {
+        ipHostNamePair.clear();
+    }
+
 }
