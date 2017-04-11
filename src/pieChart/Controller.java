@@ -128,6 +128,18 @@ public class Controller implements Initializable {
     @FXML
     public TableColumn<TableEntries, String> ip6_length;
 
+    //ARP Table
+    @FXML
+    public TableView arp_table = new TableView();
+    @FXML
+    public TableColumn<TableEntries, String> arp_hardware;
+    @FXML
+    public TableColumn<TableEntries, String> arp_protocol;
+    @FXML
+    public TableColumn<TableEntries, String> arp_operation;
+    @FXML
+    public TableColumn<TableEntries,String> arp_headerLength;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Ethernet
@@ -167,7 +179,6 @@ public class Controller implements Initializable {
         ip4_source_name.setCellValueFactory(cellData -> cellData.getValue().source_name_ip4Property());
         ip4_dest_name.setCellValueFactory(cellData -> cellData.getValue().dest_name_ip4Property());
 
-
         //IP6
         ip6_version.setCellValueFactory(cellData -> cellData.getValue().version_ip6Property());
         ip6_hdrlength.setCellValueFactory(cellData -> cellData.getValue().payload_lengthProperty());
@@ -176,6 +187,12 @@ public class Controller implements Initializable {
         ip6_dest.setCellValueFactory(cellData -> cellData.getValue().destination_ip6Property());
         ip6_nexthdr.setCellValueFactory(cellData -> cellData.getValue().next_headerProperty());
         ip6_length.setCellValueFactory(cellData -> cellData.getValue().length_ip6Property());
+
+        //ARP
+        arp_hardware.setCellValueFactory(cellData -> cellData.getValue().hardware_arpProperty());
+        arp_protocol.setCellValueFactory(cellData -> cellData.getValue().protocol_arpProperty());
+        arp_operation.setCellValueFactory(cellData -> cellData.getValue().operation_arpProperty());
+        arp_headerLength.setCellValueFactory(cellData -> cellData.getValue().headerLength_arpProperty());
 
     }
 
@@ -215,6 +232,13 @@ public class Controller implements Initializable {
         ip6_columns.setAll(table_entries5);
         ip6_table.setItems(ip6_columns);
 
+        //ARP
+        ArrayList<TableEntries> table_entries6;
+        table_entries6 = pcapReader.testingC.getARPTableEntries();
+        ObservableList<TableEntries> arp_columns = FXCollections.observableArrayList();
+        arp_columns.setAll(table_entries6);
+        arp_table.setItems(arp_columns);
+
     }
 
     @FXML
@@ -235,7 +259,6 @@ public class Controller implements Initializable {
             //This is just for testing to make sure the file was read
             System.out.println("TCP count is: " + pcapReader.testingC.getCount_tcp());
             System.out.println("UDP count is: " + pcapReader.testingC.getCount_udp());
-            System.out.println("ICMP count is: " + pcapReader.testingC.getCount_icmp());
 
             System.out.println("IP4 count is: " + pcapReader.testingC.getCount_ip4());
             System.out.println("IP6 count is: " + pcapReader.testingC.getCount_ip6());
@@ -245,12 +268,11 @@ public class Controller implements Initializable {
             ObservableList<PieChart.Data> pieChartData =
                     FXCollections.observableArrayList(
                             new PieChart.Data("TCP Count: " + pcapReader.testingC.getCount_tcp(), pcapReader.testingC.getCount_tcp()),
-                            new PieChart.Data("UDP Count: " + pcapReader.testingC.getCount_udp(), pcapReader.testingC.getCount_udp()),
-                            new PieChart.Data("ICMP Count: " + pcapReader.testingC.getCount_icmp(), pcapReader.testingC.getCount_icmp()));
+                            new PieChart.Data("UDP Count: " + pcapReader.testingC.getCount_udp(), pcapReader.testingC.getCount_udp()));
             pieChart.setData(pieChartData);
             pieChart.setLabelLineLength(10);
             pieChart.setLegendSide(Side.BOTTOM);
-            pieChart.setTitle("TCP/UDP/ICMP");
+            pieChart.setTitle("TCP/UDP");
 
             //Pie Chart2
             ObservableList<PieChart.Data> pieChartData2 =

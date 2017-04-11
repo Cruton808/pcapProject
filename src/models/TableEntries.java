@@ -55,6 +55,52 @@ public class TableEntries {
     private StringProperty next_header = new SimpleStringProperty();
     private StringProperty length_ip6 = new SimpleStringProperty();
 
+    //ARP
+    private StringProperty hardware_arp = new SimpleStringProperty();
+    private StringProperty protocol_arp = new SimpleStringProperty();
+    private StringProperty operation_arp = new SimpleStringProperty();
+    private StringProperty headerLength_arp = new SimpleStringProperty();
+
+    /////////
+
+    //ARP
+    public String getHardware_arp() {
+        return hardware_arp.get();
+    }
+    public StringProperty hardware_arpProperty() {
+        return hardware_arp;
+    }
+    public void setHardware_arp(String hardware_arp) {
+        this.hardware_arp.set(hardware_arp);
+    }
+    public String getProtocol_arp() {
+        return protocol_arp.get();
+    }
+    public StringProperty protocol_arpProperty() {
+        return protocol_arp;
+    }
+    public void setProtocol_arp(String protocol_arp) {
+        this.protocol_arp.set(protocol_arp);
+    }
+    public String getOperation_arp() {
+        return operation_arp.get();
+    }
+    public StringProperty operation_arpProperty() {
+        return operation_arp;
+    }
+    public void setOperation_arp(String operation_arp) {
+        this.operation_arp.set(operation_arp);
+    }
+    public String getHeaderLength_arp() {
+        return headerLength_arp.get();
+    }
+    public StringProperty headerLength_arpProperty() {
+        return headerLength_arp;
+    }
+    public void setHeaderLength_arp(String headerLength_arp) {
+        this.headerLength_arp.set(headerLength_arp);
+    }
+
     //GETTERS AND SETTERS
     //IP4
     public String getVersion_ip4() {
@@ -326,6 +372,18 @@ public class TableEntries {
     }
     public void setEthernet_frame_no(long ethernet_frame_no) {
         this.ethernet_frame_no.set(String.valueOf(ethernet_frame_no));
+    }
+    public void setEthernet_date(String ethernet_date) {
+        this.ethernet_date.set(ethernet_date);
+    }
+    public void setEthernet_caplen(String ethernet_caplen) {
+        this.ethernet_caplen.set(ethernet_caplen);
+    }
+    public void setEthernet_len(String ethernet_len) {
+        this.ethernet_len.set(ethernet_len);
+    }
+    public void setEthernet_frame_no(String ethernet_frame_no) {
+        this.ethernet_frame_no.set(ethernet_frame_no);
     }
 
 

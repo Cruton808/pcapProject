@@ -1,44 +1,22 @@
 package pcapReader;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-
 import IPConverter.IPConverter;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import models.TableEntries;
 import org.jnetpcap.Pcap;
-import org.jnetpcap.nio.JMemory;
-import org.jnetpcap.packet.JFlow;
-import org.jnetpcap.packet.JFlowKey;
-import org.jnetpcap.packet.JFlowMap;
 import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.packet.JPacketHandler;
-import org.jnetpcap.packet.JScanner;
-import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.format.FormatUtils;
 import org.jnetpcap.protocol.lan.Ethernet;
-import org.jnetpcap.protocol.network.Icmp;
 import org.jnetpcap.protocol.network.Ip4;
-import org.jnetpcap.protocol.tcpip.Http;
 import org.jnetpcap.protocol.tcpip.Tcp;
 import org.jnetpcap.protocol.tcpip.Udp;
 import org.jnetpcap.protocol.network.Arp;
 import org.jnetpcap.protocol.network.Ip6;
-import sun.nio.cs.StandardCharsets;
-import sun.nio.cs.UTF_32;
 
-import static java.net.InetAddress.getByAddress;
-import static java.net.InetAddress.getByName;
-import static pcapReader.testingC.runFile;
 
 /**
- * Created by Creighton PC on 2017-03-30.
+ * Created by Mark Skerl, Creighton Lee, and Amrit Gill on 2017-03-30.
  */
 public class testingC {
     private static String FILENAME;
@@ -47,13 +25,13 @@ public class testingC {
     private static int[] arp_count = {0};
     private static int[] ip4_count = {0};
     private static int[] ip6_count = {0};
-    private static int[] icmp_count = {0};
 
     private static ArrayList<TableEntries> ethernetTableValues = new ArrayList<>();
     private static ArrayList<TableEntries> tcpTableValues = new ArrayList<>();
     private static ArrayList<TableEntries> udpTableValues = new ArrayList<>();
     private static ArrayList<TableEntries> ip4TableValues = new ArrayList<>();
     private static ArrayList<TableEntries> ip6TableValues = new ArrayList<>();
+    private static ArrayList<TableEntries> arpTableValues = new ArrayList<>();
 
     public static void main(String[] args) {
         //For Testing purposes
@@ -66,7 +44,6 @@ public class testingC {
         System.out.println("ARP count is: " + getCount_arp());
         System.out.println("IP4 count is: " + getCount_ip4());
         System.out.println("IP6 count is: " + getCount_ip6());
-        System.out.println("ICMP count is: " + getCount_icmp());
 
     }
 
@@ -97,7 +74,6 @@ public class testingC {
             final Arp arp = new Arp();
             final Ip4 ip4 = new Ip4();
             final Ip6 ip6 = new Ip6();
-            final Icmp icmp = new Icmp();
             final Ethernet ethernet = new Ethernet();
 
             public void nextPacket(JPacket packet, StringBuilder errbuf) {
@@ -106,6 +82,7 @@ public class testingC {
                 TableEntries UDP_table = new TableEntries();
                 TableEntries IP4_tables = new TableEntries();
                 TableEntries IP6_tables = new TableEntries();
+                TableEntries ARP_tables = new TableEntries();
 
                 if (packet.hasHeader(tcp)) {
                     tcp_count[0] = tcp_count[0] + 1;
@@ -131,7 +108,13 @@ public class testingC {
                 }
                 if (packet.hasHeader(arp)) {
                     arp_count[0] = arp_count[0] + 1;
+                    ARP_tables.setHardware_arp(arp.hardwareTypeDescription());
+                    ARP_tables.setProtocol_arp(arp.protocolTypeDescription());
+                    ARP_tables.setOperation_arp(arp.operationDescription());
+                    ARP_tables.setHeaderLength_arp(String.valueOf(arp.getHeaderLength()));
+                    arpTableValues.add(ARP_tables);
                 }
+
                 if (packet.hasHeader(ip4)) {
                     ip4_count[0] = ip4_count[0] + 1;
 
@@ -169,9 +152,6 @@ public class testingC {
                     ip6TableValues.add(IP6_tables);
 
                 }
-                if (packet.hasHeader(icmp)) {
-                    icmp_count[0] = icmp_count[0] + 1;
-                }
 
                 if(packet.hasHeader(ethernet)){
                     te.setType_ethernet(String.valueOf(ethernet.typeEnum()));
@@ -195,7 +175,6 @@ public class testingC {
         setARP_count(arp_count);
         setIP4_count(ip4_count);
         setIP6_count(ip6_count);
-        setICMP_count(icmp_count);
 
         pcap.close();
     }
@@ -244,15 +223,6 @@ public class testingC {
         return ip6_count[0];
     }
 
-    //ICMP
-    public static void setICMP_count(int[] count){
-        icmp_count = count;
-    }
-
-    public static int getCount_icmp(){
-        return ip6_count[0];
-    }
-
     //Ethernet table entries
     public static ArrayList<TableEntries> getEthernetTableEntries(){
         return ethernetTableValues;
@@ -273,9 +243,14 @@ public class testingC {
         return ip4TableValues;
     }
 
+    //IP6 Table Entries
     public static ArrayList<TableEntries> getIP6TableEntries(){
         return ip6TableValues;
     }
 
+    //ARP Table Entries
+    public static ArrayList<TableEntries> getARPTableEntries(){
+        return arpTableValues;
+    }
 
 }
