@@ -1,7 +1,4 @@
 package IPConverter;
-
-import sun.rmi.runtime.Log;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
