@@ -50,6 +50,8 @@ public class Controller implements Initializable {
     public TableColumn<TableEntries, String> ethernet_caplen;
     @FXML
     public TableColumn<TableEntries, String> ethernet_len;
+    @FXML
+    public TableColumn<TableEntries, String> ethernet_frame_no;
 
     //TCP Table
 
@@ -134,6 +136,7 @@ public class Controller implements Initializable {
         ethernet_date.setCellValueFactory(cellData -> cellData.getValue().ethernet_dateProperty());
         ethernet_caplen.setCellValueFactory(cellData -> cellData.getValue().ethernet_caplenProperty());
         ethernet_len.setCellValueFactory(cellData -> cellData.getValue().ethernet_lenProperty());
+        ethernet_frame_no.setCellValueFactory(cellData -> cellData.getValue().ethernet_frame_noProperty());
 
         //TCP
         tcp_destination.setCellValueFactory(cellData -> cellData.getValue().destination_tcpProperty());

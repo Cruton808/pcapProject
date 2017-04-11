@@ -30,12 +30,13 @@
                      <children>
                         <TableView fx:id="ethernet_table" layoutX="-2.0" layoutY="1.0" prefHeight="431.0" prefWidth="1304.0">
                           <columns>
-                            <TableColumn fx:id="ethernet_destination" prefWidth="212.0" text="Destination MAC" />
-                            <TableColumn fx:id="ethernet_source" minWidth="0.0" prefWidth="219.0" text="Source MAC" />
-                              <TableColumn fx:id="ethernet_date" minWidth="0.0" prefWidth="296.0" text="Date &amp; Time Stamp" />
-                              <TableColumn fx:id="ethernet_type" minWidth="0.0" prefWidth="103.0" text="Type" />
-                              <TableColumn fx:id="ethernet_caplen" minWidth="0.0" prefWidth="209.0" text="Capture Length in Bytes" />
-                              <TableColumn fx:id="ethernet_len" minWidth="0.0" prefWidth="147.0" text=" Length in Bytes" />
+                              <TableColumn fx:id="ethernet_frame_no" minWidth="0.0" prefWidth="86.0" text="Frame No." />
+                            <TableColumn fx:id="ethernet_destination" prefWidth="246.0" text="Destination MAC" />
+                            <TableColumn fx:id="ethernet_source" minWidth="0.0" prefWidth="242.0" text="Source MAC" />
+                              <TableColumn fx:id="ethernet_date" minWidth="0.0" prefWidth="318.0" text="Date &amp; Time Stamp" />
+                              <TableColumn fx:id="ethernet_type" minWidth="0.0" prefWidth="83.0" text="Type" />
+                              <TableColumn fx:id="ethernet_len" minWidth="0.0" prefWidth="138.0" text=" Length in Bytes" />
+                              <TableColumn fx:id="ethernet_caplen" minWidth="0.0" prefWidth="190.0" text="Capture Length in Bytes" />
                           </columns>
                         </TableView>
                      </children>
