@@ -21,14 +21,14 @@
                 </Menu>
             </menus>
         </MenuBar>
-      <PieChart fx:id="pieChart" layoutX="15.0" layoutY="442.0" prefHeight="278.0" prefWidth="378.0" />
-      <TabPane layoutX="263.0" prefHeight="416.0" prefWidth="1190.0" tabClosingPolicy="UNAVAILABLE">
+      <PieChart fx:id="pieChart" layoutX="3.0" layoutY="483.0" prefHeight="266.0" prefWidth="378.0" />
+      <TabPane layoutX="192.0" prefHeight="471.0" prefWidth="1304.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="eTab" text="Ethernet">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="ethernet_table" layoutX="-2.0" layoutY="1.0" prefHeight="373.0" prefWidth="1187.0">
+                        <TableView fx:id="ethernet_table" layoutX="-2.0" layoutY="1.0" prefHeight="431.0" prefWidth="1304.0">
                           <columns>
                             <TableColumn fx:id="ethernet_destination" prefWidth="212.0" text="Destination MAC" />
                             <TableColumn fx:id="ethernet_source" minWidth="0.0" prefWidth="219.0" text="Source MAC" />
@@ -46,7 +46,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tcp_table" prefHeight="376.0" prefWidth="1186.0">
+                        <TableView fx:id="tcp_table" prefHeight="433.0" prefWidth="1304.0">
                           <columns>
                             <TableColumn fx:id="tcp_destination" prefWidth="124.0" text="Dest. Port" />
                             <TableColumn fx:id="tcp_source" prefWidth="149.0" text="Source Port" />
@@ -66,7 +66,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="udp_table" prefHeight="376.0" prefWidth="1188.0">
+                        <TableView fx:id="udp_table" prefHeight="432.0" prefWidth="1298.0">
                           <columns>
                             <TableColumn fx:id="udp_source" prefWidth="180.0" text="Source Port" />
                             <TableColumn fx:id="udp_destination" prefWidth="184.0" text="Destination Port" />
@@ -83,17 +83,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="ip4_table" layoutX="14.0" layoutY="1.0" prefHeight="375.0" prefWidth="1186.0">
+                        <TableView fx:id="ip4_table" layoutX="5.0" layoutY="1.0" prefHeight="431.0" prefWidth="1297.0">
                           <columns>
                             <TableColumn fx:id="ip4_version" prefWidth="67.0" text="Version" />
-                            <TableColumn fx:id="ip4_headerLength" prefWidth="137.0" text="Header Length" />
-                              <TableColumn fx:id="ip4_length" prefWidth="90.0" text="Length" />
-                              <TableColumn fx:id="ip4_ttl" prefWidth="46.0" text="TTL" />
-                              <TableColumn fx:id="ip4_type" prefWidth="88.0" text="Type" />
-                              <TableColumn fx:id="ip4_source" prefWidth="149.0" text="Source" />
-                              <TableColumn fx:id="ip4_source_name" prefWidth="188.0" text="Source Name" />
-                              <TableColumn fx:id="ip4_destination" prefWidth="188.0" text="Destination" />
-                              <TableColumn fx:id="ip4_dest_name" prefWidth="230.0" text="Dest Name" />
+                            <TableColumn fx:id="ip4_headerLength" prefWidth="123.0" text="Header Length" />
+                              <TableColumn fx:id="ip4_length" prefWidth="61.0" text="Length" />
+                              <TableColumn fx:id="ip4_ttl" prefWidth="39.0" text="TTL" />
+                              <TableColumn fx:id="ip4_type" prefWidth="59.0" text="Type" />
+                              <TableColumn fx:id="ip4_source" prefWidth="202.0" text="Source" />
+                              <TableColumn fx:id="ip4_source_name" prefWidth="290.0" text="Source Name" />
+                              <TableColumn fx:id="ip4_destination" prefWidth="166.0" text="Destination" />
+                              <TableColumn fx:id="ip4_dest_name" prefWidth="289.0" text="Dest Name" />
                           </columns>
                         </TableView>
                      </children>
@@ -104,15 +104,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="ip6_table" layoutX="7.0" layoutY="-2.0" prefHeight="374.0" prefWidth="1181.0">
+                        <TableView fx:id="ip6_table" layoutX="1.0" layoutY="-2.0" prefHeight="436.0" prefWidth="1298.0">
                           <columns>
                             <TableColumn fx:id="ip6_version" prefWidth="79.0" text="Version" />
                             <TableColumn fx:id="ip6_hdrlength" minWidth="0.0" prefWidth="156.00003051757812" text="Payload Length" />
-                              <TableColumn fx:id="ip6_length" prefWidth="130.0" text="Length" />
-                              <TableColumn fx:id="ip6_dest" minWidth="0.0" prefWidth="271.0" text="Destination" />
-                              <TableColumn fx:id="ip6_source" minWidth="0.0" prefWidth="273.0" text="Source" />
-                              <TableColumn fx:id="ip6_hoplimit" minWidth="0.0" prefWidth="137.0" text="Hop Limit" />
-                              <TableColumn fx:id="ip6_nexthdr" minWidth="0.0" prefWidth="133.0" text="Next Header" />
+                              <TableColumn fx:id="ip6_length" prefWidth="159.0" text="Length" />
+                              <TableColumn fx:id="ip6_dest" minWidth="0.0" prefWidth="242.0" text="Destination" />
+                              <TableColumn fx:id="ip6_source" minWidth="0.0" prefWidth="280.0" text="Source" />
+                              <TableColumn fx:id="ip6_hoplimit" minWidth="0.0" prefWidth="210.0" text="Hop Limit" />
+                              <TableColumn fx:id="ip6_nexthdr" minWidth="0.0" prefWidth="169.0" text="Next Header" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
@@ -120,6 +120,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <PieChart fx:id="pieChart2" layoutX="433.0" layoutY="442.0" prefHeight="278.0" prefWidth="378.0" />
+      <PieChart fx:id="pieChart2" layoutX="446.0" layoutY="477.0" prefHeight="266.0" prefWidth="378.0" />
     </children>
 </AnchorPane>

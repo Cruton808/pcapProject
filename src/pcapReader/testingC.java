@@ -147,6 +147,11 @@ public class testingC {
                     IP4_tables.setType_ip4(String.valueOf(ip4.typeEnum()));
                     IP4_tables.setSource_ip4(ip4Source);
                     IP4_tables.setDestination_ip4(ip4Dest);
+//                    try {
+//                        IP4_tables.setSource_name_ip4(InetAddress.getByName(ip4Source).getHostName());
+//                    } catch (UnknownHostException e) {
+//                        e.printStackTrace();
+//                    };
                     IP4_tables.setSource_name_ip4(IPConverter.getHostname(ip4Source));
                     IP4_tables.setDest_name_ip4(IPConverter.getHostname(ip4Dest));
                     ip4TableValues.add(IP4_tables);
