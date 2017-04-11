@@ -125,7 +125,7 @@ public class testingC {
                     UDP_table.setSource_udp(String.valueOf(udp.source()));
                     UDP_table.setHeaderLength_udp(String.valueOf(udp.getHeaderLength()));
                     UDP_table.setChecksum_udp(String.valueOf(udp.checksum()));
-                    UDP_table.setChecksum_tcp_c(udp.checksumDescription());
+                    UDP_table.setChecksum_udp_c(udp.checksumDescription());
                     udpTableValues.add(UDP_table);
 
                 }
@@ -197,20 +197,6 @@ public class testingC {
         setIP6_count(ip6_count);
         setICMP_count(icmp_count);
 
-//        //get host names
-//        for (TableEntries entry : ip4TableValues){
-//            String ip4Source = entry.getSource_ip4();
-//            String ip4Dest = entry.getDestination_ip4();
-//            try{
-//                InetAddress host = getByName(ip4Source);
-//                InetAddress dest = getByName(ip4Dest);
-//                System.out.println("Host Name: " + host.getHostName() + "\n" + "IP Address " + host.getHostAddress());
-//                System.out.println("Destination Name: " + dest.getHostName() + "\n" + "IP Address " + dest.getHostAddress());
-//                System.out.println();
-//            } catch (UnknownHostException e){
-//                e.printStackTrace();
-//            }
-//        }
         pcap.close();
     }
     //TCP

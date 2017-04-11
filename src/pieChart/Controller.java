@@ -10,6 +10,7 @@ import javafx.geometry.Side;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -225,54 +226,55 @@ public class Controller implements Initializable {
 
         File theFile = file.showOpenDialog(new Stage());
 
-        String fileN = theFile.getAbsolutePath();
-        pcapReader.testingC.setFilename(fileN);
+        try {
+            String fileN = theFile.getAbsolutePath();
+            pcapReader.testingC.setFilename(fileN);
 
-        pcapReader.testingC.runFile();
+            pcapReader.testingC.runFile();
 
-        //This is just for testing to make sure the file was read
-        System.out.println("TCP count is: " + pcapReader.testingC.getCount_tcp());
-        System.out.println("UDP count is: " + pcapReader.testingC.getCount_udp());
-        System.out.println("ICMP count is: " + pcapReader.testingC.getCount_icmp());
+            //This is just for testing to make sure the file was read
+            System.out.println("TCP count is: " + pcapReader.testingC.getCount_tcp());
+            System.out.println("UDP count is: " + pcapReader.testingC.getCount_udp());
+            System.out.println("ICMP count is: " + pcapReader.testingC.getCount_icmp());
 
-        System.out.println("IP4 count is: " + pcapReader.testingC.getCount_ip4());
-        System.out.println("IP6 count is: " + pcapReader.testingC.getCount_ip6());
-        System.out.println("ARP count is: " + pcapReader.testingC.getCount_arp());
+            System.out.println("IP4 count is: " + pcapReader.testingC.getCount_ip4());
+            System.out.println("IP6 count is: " + pcapReader.testingC.getCount_ip6());
+            System.out.println("ARP count is: " + pcapReader.testingC.getCount_arp());
 
-        //Pie Chart1
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("TCP Count: " + pcapReader.testingC.getCount_tcp(), pcapReader.testingC.getCount_tcp()),
-                        new PieChart.Data("UDP Count: " + pcapReader.testingC.getCount_udp(), pcapReader.testingC.getCount_udp()),
-                        new PieChart.Data("ICMP Count: " + pcapReader.testingC.getCount_icmp(), pcapReader.testingC.getCount_icmp()));
-        pieChart.setData(pieChartData);
-        pieChart.setLabelLineLength(10);
-        pieChart.setLegendSide(Side.BOTTOM);
-        pieChart.setTitle("TCP/UDP/ICMP");
+            //Pie Chart1
+            ObservableList<PieChart.Data> pieChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("TCP Count: " + pcapReader.testingC.getCount_tcp(), pcapReader.testingC.getCount_tcp()),
+                            new PieChart.Data("UDP Count: " + pcapReader.testingC.getCount_udp(), pcapReader.testingC.getCount_udp()),
+                            new PieChart.Data("ICMP Count: " + pcapReader.testingC.getCount_icmp(), pcapReader.testingC.getCount_icmp()));
+            pieChart.setData(pieChartData);
+            pieChart.setLabelLineLength(10);
+            pieChart.setLegendSide(Side.BOTTOM);
+            pieChart.setTitle("TCP/UDP/ICMP");
 
-        //Pie Chart2
-        ObservableList<PieChart.Data> pieChartData2 =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("IP4 Count: " + pcapReader.testingC.getCount_ip4(), pcapReader.testingC.getCount_ip4()),
-                        new PieChart.Data("IP6 Count: " + pcapReader.testingC.getCount_ip6(), pcapReader.testingC.getCount_ip6()),
-                        new PieChart.Data("ARP Count: " + pcapReader.testingC.getCount_arp(), pcapReader.testingC.getCount_arp()));
-        pieChart2.setData(pieChartData2);
-        pieChart2.setLabelLineLength(10);
-        pieChart2.setLegendSide(Side.BOTTOM);
-        pieChart2.setTitle("IP4/IP6/ARP");
+            //Pie Chart2
+            ObservableList<PieChart.Data> pieChartData2 =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("IP4 Count: " + pcapReader.testingC.getCount_ip4(), pcapReader.testingC.getCount_ip4()),
+                            new PieChart.Data("IP6 Count: " + pcapReader.testingC.getCount_ip6(), pcapReader.testingC.getCount_ip6()),
+                            new PieChart.Data("ARP Count: " + pcapReader.testingC.getCount_arp(), pcapReader.testingC.getCount_arp()));
+            pieChart2.setData(pieChartData2);
+            pieChart2.setLabelLineLength(10);
+            pieChart2.setLegendSide(Side.BOTTOM);
+            pieChart2.setTitle("IP4/IP6/ARP");
 
+            //Ethernet Table
+            setTableData();
 
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("File reading error!");
+            alert.setContentText("No file was selected.");
 
-        //Ethernet Table
-        setTableData();
-
-
-
-
-
+            alert.showAndWait();
         }
-
-
+    }
 }
 
 
