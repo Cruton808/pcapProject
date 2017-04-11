@@ -183,6 +183,7 @@ public class testingC {
                     te.setEthernet_date(new Date(packet.getCaptureHeader().timestampInMillis()));
                     te.setEthernet_caplen(packet.getCaptureHeader().caplen());
                     te.setEthernet_len(packet.getCaptureHeader().wirelen());
+                    te.setEthernet_frame_no(packet.getFrameNumber());
                     ethernetTableValues.add(te);
 
                 }

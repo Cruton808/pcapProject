@@ -16,6 +16,7 @@ public class TableEntries {
     private StringProperty ethernet_date = new SimpleStringProperty();
     private StringProperty ethernet_caplen = new SimpleStringProperty();
     private StringProperty ethernet_len = new SimpleStringProperty();
+    private StringProperty ethernet_frame_no = new SimpleStringProperty();
 
     //TCP
     private StringProperty destination_tcp = new SimpleStringProperty();
@@ -314,8 +315,17 @@ public class TableEntries {
     public StringProperty ethernet_lenProperty() {
         return ethernet_len;
     }
-    public void setEthernet_len(int ethernet_len) {
+    public void setEthernet_len(long ethernet_len) {
         this.ethernet_len.set(String.valueOf(ethernet_len));
+    }
+    public String getEthernet_frame_no() {
+        return ethernet_frame_no.get();
+    }
+    public StringProperty ethernet_frame_noProperty() {
+        return ethernet_frame_no;
+    }
+    public void setEthernet_frame_no(long ethernet_frame_no) {
+        this.ethernet_frame_no.set(String.valueOf(ethernet_frame_no));
     }
 
 
