@@ -19,7 +19,7 @@ public class IPConverter {
             String hostname = "";
 
             try {
-                hostname = InetAddress.getByName(ip).getHostName();
+                hostname = InetAddress.getByName(ip).getCanonicalHostName();
                 System.out.println(hostname);
             } catch (UnknownHostException e) {
                 hostname = ip;

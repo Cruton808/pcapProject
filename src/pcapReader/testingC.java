@@ -1,7 +1,9 @@
 package pcapReader;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import IPConverter.IPConverter;
+import IPConverter.TopDest;
 import models.TableEntries;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.JPacket;
@@ -68,6 +70,8 @@ public class testingC {
         //TODO we can either reset the cache or just add ip address to it
         IPConverter.resetCache();
 
+        TopDest newDest = new TopDest();
+
         pcap.loop(Pcap.LOOP_INFINITE, new JPacketHandler<StringBuilder>() {
             final Tcp tcp = new Tcp();
             final Udp udp = new Udp();
@@ -76,6 +80,7 @@ public class testingC {
             final Ip6 ip6 = new Ip6();
             final Ethernet ethernet = new Ethernet();
 
+
             public void nextPacket(JPacket packet, StringBuilder errbuf) {
                 TableEntries te = new TableEntries();
                 TableEntries TCP_table = new TableEntries();
@@ -83,6 +88,7 @@ public class testingC {
                 TableEntries IP4_tables = new TableEntries();
                 TableEntries IP6_tables = new TableEntries();
                 TableEntries ARP_tables = new TableEntries();
+
 
                 if (packet.hasHeader(tcp)) {
                     tcp_count[0] = tcp_count[0] + 1;
@@ -130,13 +136,14 @@ public class testingC {
                     IP4_tables.setType_ip4(String.valueOf(ip4.typeEnum()));
                     IP4_tables.setSource_ip4(ip4Source);
                     IP4_tables.setDestination_ip4(ip4Dest);
-//                    try {
-//                        IP4_tables.setSource_name_ip4(InetAddress.getByName(ip4Source).getHostName());
-//                    } catch (UnknownHostException e) {
-//                        e.printStackTrace();
-//                    };
                     IP4_tables.setSource_name_ip4(IPConverter.getHostname(ip4Source));
                     IP4_tables.setDest_name_ip4(IPConverter.getHostname(ip4Dest));
+                    //Look up by dest host ip
+                    //newDest.add(ip4Dest,ip4Source);
+
+                    //Look up by dest host name
+                    newDest.add(IPConverter.getHostname(ip4Dest), IPConverter.getHostname(ip4Source));
+
                     ip4TableValues.add(IP4_tables);
 
                 }
@@ -175,9 +182,26 @@ public class testingC {
         setARP_count(arp_count);
         setIP4_count(ip4_count);
         setIP6_count(ip6_count);
+        System.out.println();
 
         pcap.close();
+        int count = 1;
+        List<String> topIP = newDest.getTop(10);
+        ArrayList<String> ips = new ArrayList<>();
+
+        System.out.println("Top 10 destinations are: ");
+        for (String string : topIP)
+        {
+            ips.add(count + ": " + string);
+            System.out.println(count+". " + string );
+            count++;
+        }
+        System.out.println();
     }
+
+
+
+
     //TCP
     public static void setTCP_count(int[] count){
         tcp_count = count;

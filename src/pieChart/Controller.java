@@ -1,5 +1,7 @@
 package pieChart;
 
+import IPConverter.IPConverter;
+import IPConverter.TopDest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -35,6 +37,12 @@ public class Controller implements Initializable {
 
     @FXML
     public PieChart pieChart2 = new PieChart();
+
+    //dest table
+    @FXML
+    public TableView dest_table = new TableView();
+    @FXML
+    public PieChart pieChart3 = new PieChart();
 
     //Ethernet Table
     @FXML
@@ -142,6 +150,9 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
+
         //Ethernet
         ethernet_destination.setCellValueFactory(cellData -> cellData.getValue().destination_ethernetProperty());
         ethernet_source.setCellValueFactory(cellData -> cellData.getValue().source_ethernetProperty());
@@ -284,6 +295,12 @@ public class Controller implements Initializable {
             pieChart2.setLabelLineLength(10);
             pieChart2.setLegendSide(Side.BOTTOM);
             pieChart2.setTitle("IP4/IP6/ARP");
+
+//            //PieChart3
+//            ObservableList<PieChart.Data> pieChartData3 = FXCollections.observableArrayList(
+//                    new PieChart.Data("name:", IPConverter.TopDest.)
+//
+//            );
 
             //Ethernet Table
             setTableData();
