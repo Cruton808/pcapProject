@@ -1,6 +1,4 @@
 package pcapReader;
-
-import java.lang.reflect.Array;
 import java.util.*;
 import IPConverter.IPConverter;
 import IPConverter.TopDest;
@@ -15,7 +13,6 @@ import org.jnetpcap.protocol.tcpip.Tcp;
 import org.jnetpcap.protocol.tcpip.Udp;
 import org.jnetpcap.protocol.network.Arp;
 import org.jnetpcap.protocol.network.Ip6;
-
 
 /**
  * Created by Mark Skerl, Creighton Lee, and Amrit Gill on 2017-03-30.
@@ -68,7 +65,7 @@ public class testingC {
             return;
         }
 
-        //TODO we can either reset the cache or just add ip address to it
+        //we can either reset the cache or just add ip address to it
         IPConverter.resetCache();
 
         topDest.reset();
@@ -81,7 +78,6 @@ public class testingC {
             final Ip6 ip6 = new Ip6();
             final Ethernet ethernet = new Ethernet();
 
-
             public void nextPacket(JPacket packet, StringBuilder errbuf) {
                 TableEntries te = new TableEntries();
                 TableEntries TCP_table = new TableEntries();
@@ -89,7 +85,6 @@ public class testingC {
                 TableEntries IP4_tables = new TableEntries();
                 TableEntries IP6_tables = new TableEntries();
                 TableEntries ARP_tables = new TableEntries();
-
 
                 if (packet.hasHeader(tcp)) {
                     tcp_count[0] = tcp_count[0] + 1;
@@ -140,13 +135,11 @@ public class testingC {
                     IP4_tables.setSource_name_ip4(IPConverter.getHostname(ip4Source));
                     IP4_tables.setDest_name_ip4(IPConverter.getHostname(ip4Dest));
                     //Look up by dest host ip
-                    //newDest.add(ip4Dest,ip4Source);
+                    topDest.add(ip4Dest,ip4Source);
 
                     //Look up by dest host name
-                    topDest.add(IPConverter.getHostname(ip4Dest), IPConverter.getHostname(ip4Source));
-
+                    //topDest.add(IPConverter.getHostname(ip4Dest), IPConverter.getHostname(ip4Source));
                     ip4TableValues.add(IP4_tables);
-
                 }
                 if (packet.hasHeader(ip6)) {
                     ip6_count[0] = ip6_count[0] + 1;
@@ -158,7 +151,6 @@ public class testingC {
                     IP6_tables.setNext_header(String.valueOf(ip6.next()));
                     IP6_tables.setLength_ip6(String.valueOf(ip6.getNextHeaderId()));
                     ip6TableValues.add(IP6_tables);
-
                 }
 
                 if(packet.hasHeader(ethernet)){
@@ -173,9 +165,7 @@ public class testingC {
                     te.setEthernet_len(packet.getCaptureHeader().wirelen());
                     te.setEthernet_frame_no(packet.getFrameNumber());
                     ethernetTableValues.add(te);
-
                 }
-
             }
         }, errbuf);
         setTCP_count(tcp_count);
@@ -184,24 +174,8 @@ public class testingC {
         setIP4_count(ip4_count);
         setIP6_count(ip6_count);
         System.out.println();
-
         pcap.close();
-//        int count = 1;
-//        List<String> topIP = newDest.getTop(10);
-//        ArrayList<String> ips = new ArrayList<>();
-//
-//        System.out.println("Top 10 destinations are: ");
-//        for (String string : topIP)
-//        {
-//            ips.add(count + ": " + string);
-//            System.out.println(count+". " + string );
-//            count++;
-//        }
-//        System.out.println();
     }
-
-
-
 
     //TCP
     public static void setTCP_count(int[] count){

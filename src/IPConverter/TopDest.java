@@ -1,7 +1,6 @@
 package IPConverter;
 
 import java.util.*;
-
 /**
  * Created by Creighton PC on 4/11/2017.
  */
@@ -16,7 +15,6 @@ public class TopDest {
 
         IPMap.get(dest).add(src);
     }
-
 
     public int getSize(String ip){
         return IPMap.get(ip).size();
@@ -47,9 +45,7 @@ public class TopDest {
         }
         int min = Math.min(result.size(), 10);
         return result.subList(0, min);
-
     }
-
 
     public void reset() {
         IPMap.clear();

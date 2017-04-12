@@ -2,11 +2,9 @@ package models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
 import java.util.Date;
-
 /**
- * Created by Mark-Laptop on 2017-04-07.
+ * Created by Mark Skerl, Creighton Lee, and Amrit Gill on 2017-03-30.
  */
 public class TableEntries {
     //Ethernet
@@ -234,7 +232,6 @@ public class TableEntries {
         this.checksum_udp_c.set(checksum_udp_c);
     }
 
-
     //TCP
     public String getSource_tcp() {
         return source_tcp.get();
@@ -373,19 +370,6 @@ public class TableEntries {
     public void setEthernet_frame_no(long ethernet_frame_no) {
         this.ethernet_frame_no.set(String.valueOf(ethernet_frame_no));
     }
-    public void setEthernet_date(String ethernet_date) {
-        this.ethernet_date.set(ethernet_date);
-    }
-    public void setEthernet_caplen(String ethernet_caplen) {
-        this.ethernet_caplen.set(ethernet_caplen);
-    }
-    public void setEthernet_len(String ethernet_len) {
-        this.ethernet_len.set(ethernet_len);
-    }
-    public void setEthernet_frame_no(String ethernet_frame_no) {
-        this.ethernet_frame_no.set(ethernet_frame_no);
-    }
-
 
     //IP6
     public String getVersion_ip6() {
@@ -451,6 +435,5 @@ public class TableEntries {
     public void setLength_ip6(String length_ip6) {
         this.length_ip6.set(length_ip6);
     }
-
 
 }

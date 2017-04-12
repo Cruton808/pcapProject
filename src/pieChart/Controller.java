@@ -20,18 +20,10 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     @FXML
     public FileChooser file;
-
     @FXML
     public PieChart pieChart = new PieChart();
-
     @FXML
     public PieChart pieChart2 = new PieChart();
-
-    //dest table
-    @FXML
-    public TableView dest_table = new TableView();
-    @FXML
-    public PieChart pieChart3 = new PieChart();
 
     //Ethernet Table
     @FXML
