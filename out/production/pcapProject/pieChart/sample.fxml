@@ -138,6 +138,6 @@
         </tabs>
       </TabPane>
       <PieChart fx:id="pieChart2" layoutX="955.0" layoutY="362.0" prefHeight="266.0" prefWidth="378.0" />
-      <PieChart fx:id="pieChart21" layoutX="170.0" layoutY="362.0" prefHeight="266.0" prefWidth="378.0" />
+      <PieChart fx:id="pieChart3" layoutX="170.0" layoutY="362.0" prefHeight="266.0" prefWidth="378.0" />
     </children>
 </AnchorPane>
