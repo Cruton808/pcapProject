@@ -49,11 +49,7 @@ public class IPConverter {
 
     private static String reverseDns(String hostIp) throws IOException {
 
-        Record opt = null;
-
         Resolver res = new ExtendedResolver();
-
-
 
         Name name = ReverseMap.fromAddress(hostIp);
 
@@ -66,8 +62,6 @@ public class IPConverter {
         Message query = Message.newQuery(rec);
 
         Message response = res.send(query);
-
-
 
         Record[] answers = response.getSectionArray(Section.ANSWER);
 

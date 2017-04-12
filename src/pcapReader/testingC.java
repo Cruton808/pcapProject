@@ -34,6 +34,7 @@ public class testingC {
     private static ArrayList<TableEntries> ip4TableValues = new ArrayList<>();
     private static ArrayList<TableEntries> ip6TableValues = new ArrayList<>();
     private static ArrayList<TableEntries> arpTableValues = new ArrayList<>();
+    private static TopDest topDest = new TopDest();
 
     public static void main(String[] args) {
         //For Testing purposes
@@ -70,7 +71,7 @@ public class testingC {
         //TODO we can either reset the cache or just add ip address to it
         IPConverter.resetCache();
 
-        TopDest newDest = new TopDest();
+        topDest.reset();
 
         pcap.loop(Pcap.LOOP_INFINITE, new JPacketHandler<StringBuilder>() {
             final Tcp tcp = new Tcp();
@@ -142,7 +143,7 @@ public class testingC {
                     //newDest.add(ip4Dest,ip4Source);
 
                     //Look up by dest host name
-                    newDest.add(IPConverter.getHostname(ip4Dest), IPConverter.getHostname(ip4Source));
+                    topDest.add(IPConverter.getHostname(ip4Dest), IPConverter.getHostname(ip4Source));
 
                     ip4TableValues.add(IP4_tables);
 
@@ -185,18 +186,18 @@ public class testingC {
         System.out.println();
 
         pcap.close();
-        int count = 1;
-        List<String> topIP = newDest.getTop(10);
-        ArrayList<String> ips = new ArrayList<>();
-
-        System.out.println("Top 10 destinations are: ");
-        for (String string : topIP)
-        {
-            ips.add(count + ": " + string);
-            System.out.println(count+". " + string );
-            count++;
-        }
-        System.out.println();
+//        int count = 1;
+//        List<String> topIP = newDest.getTop(10);
+//        ArrayList<String> ips = new ArrayList<>();
+//
+//        System.out.println("Top 10 destinations are: ");
+//        for (String string : topIP)
+//        {
+//            ips.add(count + ": " + string);
+//            System.out.println(count+". " + string );
+//            count++;
+//        }
+//        System.out.println();
     }
 
 
@@ -277,4 +278,7 @@ public class testingC {
         return arpTableValues;
     }
 
+    public static List<String> getTopTenList() {
+        return topDest.getTop(10);
+    }
 }
