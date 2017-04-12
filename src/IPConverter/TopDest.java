@@ -45,9 +45,13 @@ public class TopDest {
                 }
             }
         }
-        return result.subList(0, 10);
+        int min = Math.min(result.size(), 10);
+        return result.subList(0, min);
 
     }
 
 
+    public void reset() {
+        IPMap.clear();
+    }
 }

@@ -12,10 +12,7 @@ import javafx.geometry.Side;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -148,6 +145,10 @@ public class Controller implements Initializable {
     @FXML
     public TableColumn<TableEntries,String> arp_headerLength;
 
+    //TOP 10 List
+    @FXML
+    public ListView<String> topTenList;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -252,6 +253,14 @@ public class Controller implements Initializable {
 
     }
 
+    public void setTopTenList() {
+        ObservableList<String> ips = FXCollections
+                .observableArrayList();
+
+        ips.addAll(pcapReader.testingC.getTopTenList());
+        topTenList.setItems(ips);
+    }
+
     @FXML
     public void openFile() {
         file = new FileChooser();
@@ -304,6 +313,9 @@ public class Controller implements Initializable {
 
             //Ethernet Table
             setTableData();
+
+            //top ten list
+            setTopTenList();
 
         } catch (NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

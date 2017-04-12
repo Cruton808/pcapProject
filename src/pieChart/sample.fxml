@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
@@ -12,7 +16,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" style="-fx-background-color: rgb(200,200,200);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pieChart.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" style="-fx-background-color: rgb(200,200,200);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pieChart.Controller">
     <children>
         <MenuBar prefHeight="25.0" prefWidth="1350.0">
             <menus>
@@ -144,7 +148,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="419.0">
                <children>
-                  <ListView prefHeight="234.0" prefWidth="421.0" />
+                  <ListView fx:id="topTenList" prefHeight="234.0" prefWidth="421.0" />
                </children>
             </AnchorPane>
         </content>
