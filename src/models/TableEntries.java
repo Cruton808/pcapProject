@@ -2,11 +2,10 @@ package models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
 import java.util.Date;
 
 /**
- * Created by Mark-Laptop on 2017-04-07.
+ * Created by Mark Skerl, Creighton Lee, and Amrit Gill on 2017-03-30.
  */
 public class TableEntries {
     //Ethernet

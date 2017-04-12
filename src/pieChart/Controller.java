@@ -1,30 +1,22 @@
 package pieChart;
 
-import IPConverter.IPConverter;
-import IPConverter.TopDest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.TableEntries;
-import org.jnetpcap.protocol.lan.Ethernet;
-
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+/**
+ * Created by Mark Skerl, Creighton Lee, and Amrit Gill on 2017-03-30.
+ */
 public class Controller implements Initializable {
     @FXML
     public FileChooser file;
@@ -152,8 +144,6 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-
         //Ethernet
         ethernet_destination.setCellValueFactory(cellData -> cellData.getValue().destination_ethernetProperty());
         ethernet_source.setCellValueFactory(cellData -> cellData.getValue().source_ethernetProperty());
@@ -205,7 +195,6 @@ public class Controller implements Initializable {
         arp_protocol.setCellValueFactory(cellData -> cellData.getValue().protocol_arpProperty());
         arp_operation.setCellValueFactory(cellData -> cellData.getValue().operation_arpProperty());
         arp_headerLength.setCellValueFactory(cellData -> cellData.getValue().headerLength_arpProperty());
-
     }
 
     public void setTableData(){
@@ -254,14 +243,12 @@ public class Controller implements Initializable {
     }
 
     public void setTopTenList() {
-        ObservableList<String> ips = FXCollections
-                .observableArrayList();
+        ObservableList<String> ips = FXCollections.observableArrayList();
 
         ips.addAll(pcapReader.testingC.getTopTenList());
         topTenList.setItems(ips);
     }
 
-    @FXML
     public void openFile() {
         file = new FileChooser();
         file.setTitle("Open Resource File");
@@ -304,12 +291,6 @@ public class Controller implements Initializable {
             pieChart2.setLabelLineLength(10);
             pieChart2.setLegendSide(Side.BOTTOM);
             pieChart2.setTitle("IP4/IP6/ARP");
-
-//            //PieChart3
-//            ObservableList<PieChart.Data> pieChartData3 = FXCollections.observableArrayList(
-//                    new PieChart.Data("name:", IPConverter.TopDest.)
-//
-//            );
 
             //Ethernet Table
             setTableData();
