@@ -32,7 +32,6 @@ public class testingC {
     private static ArrayList<TableEntries> ip4TableValues = new ArrayList<>();
     private static ArrayList<TableEntries> ip6TableValues = new ArrayList<>();
     private static ArrayList<TableEntries> arpTableValues = new ArrayList<>();
-    private static List topTenList;
 
     public static void main(String[] args) {
         //For Testing purposes
@@ -236,10 +235,6 @@ public class testingC {
         return ip6_count[0];
     }
 
-    public static List getTopTenList() {
-        return topTenList;
-    }
-
     //Ethernet table entries
     public static ArrayList<TableEntries> getEthernetTableEntries(){
         return ethernetTableValues;
@@ -270,5 +265,5 @@ public class testingC {
         return arpTableValues;
     }
 
-
+    
 }
