@@ -1,5 +1,6 @@
 package pcapReader;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import IPConverter.IPConverter;
 import IPConverter.TopDest;
@@ -14,6 +15,7 @@ import org.jnetpcap.protocol.tcpip.Tcp;
 import org.jnetpcap.protocol.tcpip.Udp;
 import org.jnetpcap.protocol.network.Arp;
 import org.jnetpcap.protocol.network.Ip6;
+
 
 /**
  * Created by Mark Skerl, Creighton Lee, and Amrit Gill on 2017-03-30.
@@ -32,6 +34,7 @@ public class testingC {
     private static ArrayList<TableEntries> ip4TableValues = new ArrayList<>();
     private static ArrayList<TableEntries> ip6TableValues = new ArrayList<>();
     private static ArrayList<TableEntries> arpTableValues = new ArrayList<>();
+    private static TopDest topDest = new TopDest();
 
     public static void main(String[] args) {
         //For Testing purposes
@@ -44,6 +47,7 @@ public class testingC {
         System.out.println("ARP count is: " + getCount_arp());
         System.out.println("IP4 count is: " + getCount_ip4());
         System.out.println("IP6 count is: " + getCount_ip6());
+
     }
 
     public static void setFilename(String filename){
@@ -64,10 +68,11 @@ public class testingC {
             return;
         }
 
-        //Twe can either reset the cache or just add ip address to it
+        //TODO we can either reset the cache or just add ip address to it
         IPConverter.resetCache();
 
-        TopDest newDest = new TopDest();
+        topDest.reset();
+
         pcap.loop(Pcap.LOOP_INFINITE, new JPacketHandler<StringBuilder>() {
             final Tcp tcp = new Tcp();
             final Udp udp = new Udp();
@@ -75,6 +80,7 @@ public class testingC {
             final Ip4 ip4 = new Ip4();
             final Ip6 ip6 = new Ip6();
             final Ethernet ethernet = new Ethernet();
+
 
             public void nextPacket(JPacket packet, StringBuilder errbuf) {
                 TableEntries te = new TableEntries();
@@ -133,13 +139,15 @@ public class testingC {
                     IP4_tables.setDestination_ip4(ip4Dest);
                     IP4_tables.setSource_name_ip4(IPConverter.getHostname(ip4Source));
                     IP4_tables.setDest_name_ip4(IPConverter.getHostname(ip4Dest));
-                    //newDest.add(ip4Dest,ip4Source); //Look up by dest host ip
+                    //Look up by dest host ip
+                    //newDest.add(ip4Dest,ip4Source);
 
                     //Look up by dest host name
-                    newDest.add(IPConverter.getHostname(ip4Dest), IPConverter.getHostname(ip4Source));
-                    ip4TableValues.add(IP4_tables);
-                }
+                    topDest.add(IPConverter.getHostname(ip4Dest), IPConverter.getHostname(ip4Source));
 
+                    ip4TableValues.add(IP4_tables);
+
+                }
                 if (packet.hasHeader(ip6)) {
                     ip6_count[0] = ip6_count[0] + 1;
                     IP6_tables.setVersion_ip6(String.valueOf(ip6.version()));
@@ -150,6 +158,7 @@ public class testingC {
                     IP6_tables.setNext_header(String.valueOf(ip6.next()));
                     IP6_tables.setLength_ip6(String.valueOf(ip6.getNextHeaderId()));
                     ip6TableValues.add(IP6_tables);
+
                 }
 
                 if(packet.hasHeader(ethernet)){
@@ -164,10 +173,11 @@ public class testingC {
                     te.setEthernet_len(packet.getCaptureHeader().wirelen());
                     te.setEthernet_frame_no(packet.getFrameNumber());
                     ethernetTableValues.add(te);
+
                 }
+
             }
         }, errbuf);
-
         setTCP_count(tcp_count);
         setUDP_count(udp_count);
         setARP_count(arp_count);
@@ -176,19 +186,22 @@ public class testingC {
         System.out.println();
 
         pcap.close();
-        int count = 1;
-        List<String> topIP = newDest.getTop(10);
-        ArrayList<String> ips = new ArrayList<>();
-
-        System.out.println("Top 10 destinations are: ");
-        for (String string : topIP)
-        {
-            ips.add(count + ": " + string);
-            System.out.println(count+". " + string );
-            count++;
-        }
-        System.out.println();
+//        int count = 1;
+//        List<String> topIP = newDest.getTop(10);
+//        ArrayList<String> ips = new ArrayList<>();
+//
+//        System.out.println("Top 10 destinations are: ");
+//        for (String string : topIP)
+//        {
+//            ips.add(count + ": " + string);
+//            System.out.println(count+". " + string );
+//            count++;
+//        }
+//        System.out.println();
     }
+
+
+
 
     //TCP
     public static void setTCP_count(int[] count){
@@ -265,5 +278,7 @@ public class testingC {
         return arpTableValues;
     }
 
-    
+    public static List<String> getTopTenList() {
+        return topDest.getTop(10);
+    }
 }
