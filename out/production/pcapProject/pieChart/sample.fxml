@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
@@ -10,11 +11,13 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" style="-fx-background-color: rgb(200,200,200);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pieChart.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1360.0" style="-fx-background-color: rgb(125,125,125);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pieChart.Controller">
     <children>
-        <MenuBar prefHeight="25.0" prefWidth="1350.0">
+        <MenuBar prefHeight="25.0" prefWidth="1366.0" style="-fx-background-color: rgb(220, 150, 224);">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
@@ -23,14 +26,14 @@
                 </Menu>
             </menus>
         </MenuBar>
-      <PieChart fx:id="pieChart" layoutX="567.0" layoutY="362.0" prefHeight="266.0" prefWidth="378.0" />
-      <TabPane layoutX="16.0" layoutY="26.0" prefHeight="326.0" prefWidth="1312.0" tabClosingPolicy="UNAVAILABLE">
+        <PieChart fx:id="pieChart" layoutX="550.0" layoutY="408.0" prefHeight="266.0" prefWidth="378.0" />
+      <TabPane layoutX="19.0" layoutY="32.0" prefHeight="332.0" prefWidth="1312.0" style="-fx-border-width: 2.5px; -fx-border-color: black;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="eTab" text="Ethernet">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="281.0" prefWidth="1230.0">
                      <children>
-                        <TableView fx:id="ethernet_table" prefHeight="298.0" prefWidth="1312.0">
+                        <TableView fx:id="ethernet_table" layoutX="-3.0" layoutY="-1.0" prefHeight="298.0" prefWidth="1312.0" style="-fx-background-color: rgb(75,75,75);">
                           <columns>
                               <TableColumn fx:id="ethernet_frame_no" minWidth="0.0" prefWidth="97.5999755859375" text="Frame No." />
                             <TableColumn fx:id="ethernet_destination" minWidth="0.0" prefWidth="240.60000610351562" text="Destination MAC" />
@@ -49,7 +52,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="ip4_table" layoutX="-2.0" layoutY="1.0" prefHeight="295.0" prefWidth="1317.0">
+                        <TableView fx:id="ip4_table" layoutY="1.0" prefHeight="299.0" prefWidth="1306.0" style="-fx-background-color: rgb(75,75,75);">
                           <columns>
                             <TableColumn fx:id="ip4_version" prefWidth="67.0" text="Version" />
                             <TableColumn fx:id="ip4_headerLength" prefWidth="123.0" text="Header Length" />
@@ -61,6 +64,9 @@
                               <TableColumn fx:id="ip4_destination" prefWidth="166.0" text="Destination" />
                               <TableColumn fx:id="ip4_dest_name" prefWidth="289.0" text="Dest Name" />
                           </columns>
+                           <padding>
+                              <Insets top="-1.0" />
+                           </padding>
                         </TableView>
                      </children>
                   </AnchorPane>
@@ -70,7 +76,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="ip6_table" layoutX="1.0" layoutY="-2.0" prefHeight="298.0" prefWidth="1317.0">
+                        <TableView fx:id="ip6_table" layoutY="3.0" prefHeight="298.0" prefWidth="1306.0" style="-fx-background-color: rgb(75,75,75);">
                           <columns>
                             <TableColumn fx:id="ip6_version" prefWidth="79.0" text="Version" />
                             <TableColumn fx:id="ip6_hdrlength" minWidth="0.0" prefWidth="156.00003051757812" text="Payload Length" />
@@ -80,6 +86,9 @@
                               <TableColumn fx:id="ip6_hoplimit" minWidth="0.0" prefWidth="210.0" text="Hop Limit" />
                               <TableColumn fx:id="ip6_nexthdr" minWidth="0.0" prefWidth="169.0" text="Next Header" />
                           </columns>
+                           <padding>
+                              <Insets top="-3.0" />
+                           </padding>
                         </TableView>
                      </children></AnchorPane>
               </content>
@@ -88,13 +97,16 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="arp_table" layoutY="-7.0" prefHeight="304.0" prefWidth="1317.0">
+                        <TableView fx:id="arp_table" layoutX="-3.0" prefHeight="304.0" prefWidth="1312.0" style="-fx-background-color: rgb(75,75,75);">
                           <columns>
-                            <TableColumn fx:id="arp_hardware" prefWidth="235.0" text="Hardware Type" />
-                            <TableColumn fx:id="arp_protocol" prefWidth="232.0" text="Protocol Type" />
-                              <TableColumn fx:id="arp_operation" prefWidth="250.800048828125" text="Operation" />
-                              <TableColumn fx:id="arp_headerLength" prefWidth="235.4000244140625" text="Header Length" />
+                            <TableColumn fx:id="arp_hardware" prefWidth="276.0" text="Hardware Type" />
+                            <TableColumn fx:id="arp_protocol" prefWidth="253.0" text="Protocol Type" />
+                              <TableColumn fx:id="arp_operation" prefWidth="236.0" text="Operation" />
+                              <TableColumn fx:id="arp_headerLength" prefWidth="211.0" text="Header Length" />
                           </columns>
+                           <padding>
+                              <Insets top="-1.0" />
+                           </padding>
                         </TableView>
                      </children>
                   </AnchorPane>
@@ -104,17 +116,20 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tcp_table" prefHeight="296.0" prefWidth="1317.0">
+                        <TableView fx:id="tcp_table" layoutY="4.0" prefHeight="296.0" prefWidth="1306.0" style="-fx-background-color: rgb(75,75,75);">
                           <columns>
-                            <TableColumn fx:id="tcp_destination" prefWidth="124.0" text="Dest. Port" />
+                            <TableColumn fx:id="tcp_destination" prefWidth="145.0" text="Dest. Port" />
                             <TableColumn fx:id="tcp_source" prefWidth="149.0" text="Source Port" />
-                              <TableColumn fx:id="tcp_seq" prefWidth="114.0" text="Seq Number" />
-                              <TableColumn fx:id="tcp_ack" prefWidth="135.0" text="Ack Number" />
-                              <TableColumn fx:id="tcp_header" prefWidth="138.0" text="Header Length" />
-                              <TableColumn fx:id="tcp_seglength" prefWidth="163.0" text="Segment Length" />
-                              <TableColumn fx:id="tcp_checksum" prefWidth="173.0" text="Checksum Value" />
-                              <TableColumn fx:id="tcp_checksum_c" prefWidth="173.0" text="Checksum" />
+                              <TableColumn fx:id="tcp_seq" prefWidth="169.0" text="Seq Number" />
+                              <TableColumn fx:id="tcp_ack" prefWidth="149.0" text="Ack Number" />
+                              <TableColumn fx:id="tcp_header" prefWidth="153.0" text="Header Length" />
+                              <TableColumn fx:id="tcp_seglength" prefWidth="191.0" text="Segment Length" />
+                              <TableColumn fx:id="tcp_checksum" prefWidth="179.0" text="Checksum Value" />
+                              <TableColumn fx:id="tcp_checksum_c" prefWidth="154.0" text="Checksum" />
                           </columns>
+                           <padding>
+                              <Insets top="-4.0" />
+                           </padding>
                         </TableView>
                      </children>
                   </AnchorPane>
@@ -124,7 +139,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="udp_table" prefHeight="298.0" prefWidth="1317.0">
+                        <TableView fx:id="udp_table" layoutY="3.0" prefHeight="298.0" prefWidth="1306.0" style="-fx-background-color: rgb(75,75,75);">
                           <columns>
                             <TableColumn fx:id="udp_source" prefWidth="180.0" text="Source Port" />
                             <TableColumn fx:id="udp_destination" prefWidth="184.0" text="Destination Port" />
@@ -132,6 +147,9 @@
                               <TableColumn fx:id="udp_checksum" minWidth="0.0" prefWidth="202.20001220703125" text="Checksum Value" />
                               <TableColumn fx:id="udp_checksum_c" minWidth="0.0" prefWidth="202.20001220703125" text="Checksum" />
                           </columns>
+                           <padding>
+                              <Insets top="-3.0" />
+                           </padding>
                         </TableView>
                      </children>
                   </AnchorPane>
@@ -139,15 +157,20 @@
             </Tab>
         </tabs>
       </TabPane>
-      <PieChart fx:id="pieChart2" layoutX="955.0" layoutY="362.0" prefHeight="266.0" prefWidth="378.0" />
-      <TitledPane animated="false" layoutX="209.0" layoutY="362.0" prefHeight="266.0" prefWidth="350.0" text="Top 10 hostnames">
+      <PieChart fx:id="pieChart2" layoutX="953.0" layoutY="408.0" prefHeight="266.0" prefWidth="378.0" />
+      <TitledPane animated="false" layoutX="283.0" layoutY="400.0" prefHeight="274.0" prefWidth="221.0" style="-fx-border-width: 2.5px; -fx-border-color: black;" text="Top 10 Destination IP Address:">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="419.0">
                <children>
-                  <ListView fx:id="topTenList" layoutX="-1.0" prefHeight="234.0" prefWidth="421.0" />
+                  <ListView fx:id="topTenList" layoutX="-1.0" prefHeight="243.0" prefWidth="215.0" style="-fx-background-color: rgb(75,75,75);" />
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
+      <ImageView fitHeight="184.0" fitWidth="301.0" layoutX="-22.0" layoutY="449.0" rotate="74.6">
+         <image>
+            <Image url="@pink-shark.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
