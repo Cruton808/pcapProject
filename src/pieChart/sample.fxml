@@ -162,12 +162,12 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="419.0">
                <children>
-                  <ListView fx:id="topTenList" layoutX="-1.0" prefHeight="243.0" prefWidth="215.0" style="-fx-background-color: rgb(75,75,75);" />
+                  <ListView fx:id="topTenList" layoutX="-1.0" prefHeight="243.0" prefWidth="244.0" style="-fx-background-color: rgb(75,75,75);" />
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
-      <ImageView fitHeight="184.0" fitWidth="301.0" layoutX="-22.0" layoutY="449.0" rotate="74.6">
+      <ImageView fitHeight="193.0" fitWidth="300.0" layoutX="-13.0" layoutY="447.0" rotate="74.6">
          <image>
             <Image url="@pink-shark.png" />
          </image>
