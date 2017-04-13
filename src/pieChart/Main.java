@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,7 +15,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Pcap Shark App");
         primaryStage.setScene(new Scene(root, 1360, 700));
-
+        primaryStage.getIcons().add(new Image("pieChart/cuteshark.png"));
         primaryStage.show();
     }
 

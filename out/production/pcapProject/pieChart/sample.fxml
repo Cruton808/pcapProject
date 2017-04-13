@@ -26,7 +26,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <PieChart fx:id="pieChart" layoutX="550.0" layoutY="408.0" prefHeight="266.0" prefWidth="378.0" />
+        <PieChart fx:id="pieChart" layoutX="571.0" layoutY="375.0" prefHeight="320.0" prefWidth="391.0" />
       <TabPane layoutX="19.0" layoutY="32.0" prefHeight="332.0" prefWidth="1312.0" style="-fx-border-width: 2.5px; -fx-border-color: black;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="eTab" text="Ethernet">
@@ -157,19 +157,19 @@
             </Tab>
         </tabs>
       </TabPane>
-      <PieChart fx:id="pieChart2" layoutX="953.0" layoutY="408.0" prefHeight="266.0" prefWidth="378.0" />
-      <TitledPane animated="false" layoutX="283.0" layoutY="400.0" prefHeight="274.0" prefWidth="221.0" style="-fx-border-width: 2.5px; -fx-border-color: black;" text="Top 10 Destination IP Address:">
+      <PieChart fx:id="pieChart2" layoutX="962.0" layoutY="375.0" prefHeight="320.0" prefWidth="391.0" />
+      <TitledPane animated="false" layoutX="312.0" layoutY="372.0" prefHeight="320.0" prefWidth="252.0" style="-fx-border-width: 2.5px; -fx-border-color: black;" text="Top 10 Destination IP Address:">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="419.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="283.0" prefWidth="244.0">
                <children>
-                  <ListView fx:id="topTenList" layoutX="-1.0" prefHeight="243.0" prefWidth="215.0" style="-fx-background-color: rgb(75,75,75);" />
+                  <ListView fx:id="topTenList" layoutX="-1.0" prefHeight="284.0" prefWidth="245.0" style="-fx-background-color: rgb(75,75,75);" />
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
-      <ImageView fitHeight="184.0" fitWidth="301.0" layoutX="-22.0" layoutY="449.0" rotate="74.6">
+      <ImageView fitHeight="193.0" fitWidth="300.0" layoutX="9.0" layoutY="438.0" rotate="-5.7">
          <image>
-            <Image url="@pink-shark.png" />
+            <Image url="@cuteshark.png" />
          </image>
       </ImageView>
     </children>
